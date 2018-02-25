@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Plop !</title>
-    <link>/posts/</link>
+    <link>https://victorfleury.github.io/posts/</link>
     <description>Recent content in Posts on Plop !</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Victor Fleury</copyright>
     <lastBuildDate>Mon, 29 Jan 2018 23:15:14 +0100</lastBuildDate>
     
-	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://victorfleury.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello world</title>
-      <link>/posts/my-first-post/</link>
+      <link>https://victorfleury.github.io/posts/my-first-post/</link>
       <pubDate>Mon, 29 Jan 2018 23:15:14 +0100</pubDate>
       
-      <guid>/posts/my-first-post/</guid>
+      <guid>https://victorfleury.github.io/posts/my-first-post/</guid>
       <description>Hello world, I am just messing around with hugo the static website generator.</description>
     </item>
     
