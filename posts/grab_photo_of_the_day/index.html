@@ -155,23 +155,23 @@ However, looking at the source code of the page, we can see this interesting lin
 Inspecting it in Firefox gives us a good overview of the content.
 We can see that there is one file per month of the year based on the naming convention : <code>.gallery.2018-02.json</code></p>
 
-<p>The file contains a list of <code>items</code> which are described as follow :</p>
+<p>The file contains a list of <code>items</code> which are described as follow : (The descriptions are only wild guesses.)</p>
 
 <ul>
-<li><code>index</code></li>
-<li><code>title</code></li>
-<li><code>caption</code></li>
-<li><code>credit</code></li>
-<li><code>profileUrl</code></li>
-<li><code>altText</code></li>
-<li><code>full-path-url</code></li>
-<li><code>url</code></li>
+<li><code>index</code> : a sorting index</li>
+<li><code>title</code> : title of the photo</li>
+<li><code>caption</code> : caption text being displayed on the site</li>
+<li><code>credit</code> : author</li>
+<li><code>profileUrl</code> : profile page of the author</li>
+<li><code>altText</code> : alternative text</li>
+<li><code>full-path-url</code> : URL to the picture</li>
+<li><code>url</code> : root url</li>
 <li><code>originalUrl</code></li>
 <li><code>aspectRatio</code></li>
 <li><code>sizes</code> : a dictionary of sizes</li>
 <li><code>internal</code></li>
 <li><code>pageUrl</code></li>
-<li><code>publishDate</code></li>
+<li><code>publishDate</code> : date of publication</li>
 <li><code>yourShot</code></li>
 <li><code>social</code></li>
 </ul>
@@ -285,7 +285,7 @@ def get_all_month_photos(size=None):
 		size(str): The size of the picture we want to dowload.
 	&quot;&quot;&quot;
 
-	# CHecking the size
+	# Checking the size
 	if not size in ['1024', '1600', '2048', '640', '320', '240', '800', '500']:
 		raise RuntimeError('Size is not valid.')
 	# Getting the date and the month
@@ -312,11 +312,16 @@ if __name__ == '__main__':
 	get_all_month_photos(size=sys.argv[1])
 </code></pre>
 
+<p>Now you just run it like this in a console :</p>
+
+<pre><code class="language-terminal">$ python daily_photo.py 2048
+</code></pre>
+
 <p>Et voilà !</p>
 
 <p>There you have all the photos of the day of the month.</p>
 
-<p>Some improvements though, we could add a config parser to make sure we get specific arguments.</p>
+<p>Some improvements though, we could add a config parser to make sure we get specific arguments such as the year, month, size, output direcotry, etc&hellip;</p>
 
 <p>That&rsquo;s all folks !</p>
 
