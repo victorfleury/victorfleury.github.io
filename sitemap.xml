@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://victorfleury.github.io/posts/nat_geo/</loc>
+    <loc>https://victorfleury.github.io/posts/grab_photo_of_the_day/</loc>
     <lastmod>2018-02-25T18:45:26+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://victorfleury.github.io/content/about/</loc>
+    <loc>https://victorfleury.github.io/about/</loc>
+    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://victorfleury.github.io/contact/</loc>
     <lastmod>2018-02-25T00:00:00+00:00</lastmod>
   </url>
   

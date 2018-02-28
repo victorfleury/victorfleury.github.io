@@ -6,7 +6,7 @@
     <description>Recent content on Plop !</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Victor Fleury</copyright>
+    <copyright>Victor Fleury. Made with ❤ with Hugo</copyright>
     <lastBuildDate>Sun, 25 Feb 2018 18:45:26 +0100</lastBuildDate>
     
 	<atom:link href="https://victorfleury.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -14,21 +14,12 @@
     
     <item>
       <title>Grab a nice wallpaper every day</title>
-      <link>https://victorfleury.github.io/posts/nat_geo/</link>
+      <link>https://victorfleury.github.io/posts/grab_photo_of_the_day/</link>
       <pubDate>Sun, 25 Feb 2018 18:45:26 +0100</pubDate>
       
-      <guid>https://victorfleury.github.io/posts/nat_geo/</guid>
+      <guid>https://victorfleury.github.io/posts/grab_photo_of_the_day/</guid>
       <description>This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and save it in a specific folder. The os then updates the wallpaper daily.
 It is not as easy it seems to grab the picture from the web site, as the current hierarchy does not make it easy. However, looking at the source code of the page, we can see this interesting line :</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://victorfleury.github.io/content/about/</link>
-      <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://victorfleury.github.io/content/about/</guid>
-      <description>Hello this is an about page.</description>
     </item>
     
     <item>
