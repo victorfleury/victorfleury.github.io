@@ -125,15 +125,20 @@ We can see that there is one file per month of the year based on the naming conv
 <p>Here is the simple code to get today&rsquo;s photo :</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
 <span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> logging
 <span style="color:#f92672">import</span> os
 <span style="color:#f92672">import</span> urllib
 <span style="color:#f92672">import</span> time
+<span style="color:#f92672">from</span> optparse <span style="color:#f92672">import</span> OptionParser
 
-
+logging<span style="color:#f92672">.</span>basicConfig()
+LOGGER <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger()
+LOGGER<span style="color:#f92672">.</span>setLevel(logging<span style="color:#f92672">.</span>INFO)
 ROOT_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://yourshot.nationalgeographic.com/&#39;</span>
 JSON_ROOT_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/&#39;</span>
 DATA_FORMAT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;.gallery.{YEAR}-{MONTH}.json&#39;</span>
 ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/victor/Images/&#39;</span>
+
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_picture</span>(item, size, base<span style="color:#f92672">=</span>ROOT_OUTPUT, force<span style="color:#f92672">=</span>False):
     <span style="color:#e6db74">&#34;&#34;&#34;Get the picture of the day.
@@ -143,10 +148,14 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
 </span><span style="color:#e6db74">    Args:
 </span><span style="color:#e6db74">        item(dict): The dictionary representing the item
 </span><span style="color:#e6db74">        size(str): The size we cant to download.
+</span><span style="color:#e6db74">        base(str): The base of the path where images will be saved.
+</span><span style="color:#e6db74">        force(bool): Force overwrite of the image if it is already on disk.
 </span><span style="color:#e6db74">    Return:
 </span><span style="color:#e6db74">        bool: True if successful otherwise False
 </span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
 
+    <span style="color:#f92672">from</span> pprint <span style="color:#f92672">import</span> pprint
+    <span style="color:#75715e"># pprint(item)fa</span>
     sizes <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;sizes&#39;</span>, None)
     <span style="color:#66d9ef">if</span> sizes:
         url_part <span style="color:#f92672">=</span> sizes[size]
@@ -163,12 +172,15 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
             os<span style="color:#f92672">.</span>makedirs(base)
         <span style="color:#75715e"># Photo already exists and no need to download it again</span>
         <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;{}{}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output)) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> force:
+            LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;  * File already exists on disk.&#39;</span>)
             <span style="color:#66d9ef">return</span> True
         urllib<span style="color:#f92672">.</span>urlretrieve(
             photo_url,
             <span style="color:#e6db74">&#39;{}{}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output),
         )
+        LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;  * File successfully retrieved.&#39;</span>)
     <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">IOError</span>:
+        LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;  * Could not save file...&#39;</span>)
         <span style="color:#66d9ef">return</span> False
 
     <span style="color:#66d9ef">return</span> True</code></pre></div>
@@ -189,6 +201,7 @@ JSON_ROOT_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&
 DATA_FORMAT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;.gallery.{YEAR}-{MONTH}.json&#39;</span>
 ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/victor/Images/&#39;</span>
 
+
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_picture</span>(item, size, base<span style="color:#f92672">=</span>ROOT_OUTPUT, force<span style="color:#f92672">=</span>False):
     <span style="color:#e6db74">&#34;&#34;&#34;Get the picture of the day.
 </span><span style="color:#e6db74">
@@ -197,6 +210,8 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
 </span><span style="color:#e6db74">    Args:
 </span><span style="color:#e6db74">        item(dict): The dictionary representing the item
 </span><span style="color:#e6db74">        size(str): The size we cant to download.
+</span><span style="color:#e6db74">        base(str): The base of the path where images will be saved.
+</span><span style="color:#e6db74">        force(bool): Force overwrite of the image if it is already on disk.
 </span><span style="color:#e6db74">    Return:
 </span><span style="color:#e6db74">        bool: True if successful otherwise False
 </span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
@@ -232,15 +247,20 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
 
     <span style="color:#66d9ef">return</span> True
 
+
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_all_month_photos</span>(size<span style="color:#f92672">=</span>None, year<span style="color:#f92672">=</span>None, month<span style="color:#f92672">=</span>None, force<span style="color:#f92672">=</span>False):
     <span style="color:#e6db74">&#34;&#34;&#34;Get all the photo of the month.
 </span><span style="color:#e6db74">
 </span><span style="color:#e6db74">    Args:
-</span><span style="color:#e6db74">        size(str): The size of the picture we want to dowload.
+</span><span style="color:#e6db74">        size(str): The size of the picture we want to download.
+</span><span style="color:#e6db74">        year(str): The year to look for pictures.
+</span><span style="color:#e6db74">        month(str): The month to look for pictures.
+</span><span style="color:#e6db74">        force(bool): Force the download and save of the picture even if it is
+</span><span style="color:#e6db74">            already present.
 </span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
 
     <span style="color:#75715e"># Checking the size</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> size <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;1024&#39;</span>, <span style="color:#e6db74">&#39;1600&#39;</span>, <span style="color:#e6db74">&#39;2048&#39;</span>, <span style="color:#e6db74">&#39;640&#39;</span>, <span style="color:#e6db74">&#39;320&#39;</span>, <span style="color:#e6db74">&#39;240&#39;</span>, <span style="color:#e6db74">&#39;800&#39;</span>, <span style="color:#e6db74">&#39;500&#39;</span>]:
+    <span style="color:#66d9ef">if</span> size <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;1024&#39;</span>, <span style="color:#e6db74">&#39;1600&#39;</span>, <span style="color:#e6db74">&#39;2048&#39;</span>, <span style="color:#e6db74">&#39;640&#39;</span>, <span style="color:#e6db74">&#39;320&#39;</span>, <span style="color:#e6db74">&#39;240&#39;</span>, <span style="color:#e6db74">&#39;800&#39;</span>, <span style="color:#e6db74">&#39;500&#39;</span>]:
         <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74">&#39;Size is not valid.&#39;</span>)
     LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;About to retrieve data...&#39;</span>)
     
@@ -261,12 +281,18 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
     photos_data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(response<span style="color:#f92672">.</span>read())
 
     <span style="color:#66d9ef">if</span> photos_data:
-        LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;Retrieving : {0} photos.&#39;</span><span style="color:#f92672">.</span>format(len(photos_data[<span style="color:#e6db74">&#39;items&#39;</span>])))
+        LOGGER<span style="color:#f92672">.</span>info(
+            <span style="color:#e6db74">&#39;Retrieving : {0} photos.&#39;</span><span style="color:#f92672">.</span>format(len(photos_data[<span style="color:#e6db74">&#39;items&#39;</span>]))
+        )
 
     <span style="color:#66d9ef">for</span> index, item <span style="color:#f92672">in</span> enumerate(photos_data[<span style="color:#e6db74">&#39;items&#39;</span>]):
-        LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;Retrieving {0}/{1}&#39;</span><span style="color:#f92672">.</span>format(index<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, len(photos_data[<span style="color:#e6db74">&#39;items&#39;</span>])))
+        LOGGER<span style="color:#f92672">.</span>info(
+            <span style="color:#e6db74">&#39;Retrieving {0}/{1}&#39;</span><span style="color:#f92672">.</span>format(index<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, len(photos_data[<span style="color:#e6db74">&#39;items&#39;</span>]))
+        )
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> get_picture(item<span style="color:#f92672">=</span>item, size<span style="color:#f92672">=</span>size, force<span style="color:#f92672">=</span>force):
-            LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;[ERROR] Could not retrieve : {0}&#39;</span><span style="color:#f92672">.</span>format(item[<span style="color:#e6db74">&#39;publishDate&#39;</span>]))
+            LOGGER<span style="color:#f92672">.</span>error(
+                <span style="color:#e6db74">&#39;[ERROR] Could not retrieve : {0}&#39;</span><span style="color:#f92672">.</span>format(item[<span style="color:#e6db74">&#39;publishDate&#39;</span>])
+            )
 
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     <span style="color:#f92672">import</span> sys
