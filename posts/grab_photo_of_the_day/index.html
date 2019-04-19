@@ -7,7 +7,8 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="description" content="This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and save it in a specific folder. With a small cron job, it is then ran every day automatically.
-It is not as easy it seems to grab the picture from the web site, as the current hierarchy does not make it easy. However, looking at the source code of the page, we can see this interesting line :"/>
+Since no API is being provided, we must scrap the webpage for the information we want. However, looking at the source code of the page, we can see this interesting line :
+"/>
 <meta name="keywords" content=""/>
 <meta name="robots" content="noodp"/>
 <link rel="canonical" href="https://victorfleury.github.io/posts/grab_photo_of_the_day/" />
@@ -26,7 +27,8 @@ It is not as easy it seems to grab the picture from the web site, as the current
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Grab a nice wallpaper every day :: Plop ! — " />
 <meta name="twitter:description" content="This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and save it in a specific folder. With a small cron job, it is then ran every day automatically.
-It is not as easy it seems to grab the picture from the web site, as the current hierarchy does not make it easy. However, looking at the source code of the page, we can see this interesting line :" />
+Since no API is being provided, we must scrap the webpage for the information we want. However, looking at the source code of the page, we can see this interesting line :
+" />
 <meta name="twitter:site" content="https://victorfleury.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image" content="">
@@ -36,7 +38,8 @@ It is not as easy it seems to grab the picture from the web site, as the current
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Grab a nice wallpaper every day :: Plop ! — ">
 <meta property="og:description" content="This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and save it in a specific folder. With a small cron job, it is then ran every day automatically.
-It is not as easy it seems to grab the picture from the web site, as the current hierarchy does not make it easy. However, looking at the source code of the page, we can see this interesting line :" />
+Since no API is being provided, we must scrap the webpage for the information we want. However, looking at the source code of the page, we can see this interesting line :
+" />
 <meta property="og:url" content="https://victorfleury.github.io/posts/grab_photo_of_the_day/" />
 <meta property="og:site_name" content="Grab a nice wallpaper every day" />
 <meta property="og:image" content="">
@@ -147,8 +150,9 @@ It is not as easy it seems to grab the picture from the web site, as the current
       <p>This is a small tool I developed to grab the latest image from the <a href="https://www.nationalgeographic.com/photography/photo-of-the-day/">National Geographic&rsquo;s</a> website and save it in a specific folder.
 With a small cron job, it is then ran every day automatically.</p>
 
-<p>It is not as easy it seems to grab the picture from the web site, as the current hierarchy does not make it easy.
+<p>Since no API is being provided, we must scrap the webpage for the information we want.
 However, looking at the source code of the page, we can see this interesting line :</p>
+
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">data-pestle-module</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;infiniteGallery&#34;</span>&gt;
         &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/json&#34;</span> <span style="color:#a6e22e">data-pestle-options</span>&gt;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010">            {&#34;id&#34;:&#34;OwFPp5uL&#34;,&#34;firstImage&#34;:&#34;https://www.nationalgeographic.com/photography/photo-of-the-day/2018/02/pakistan-coal-miner-portrait&#34;,&#34;endpoint&#34;:&#34;https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.2018-02.json&#34;,......</span></code></pre></div>
@@ -405,7 +409,6 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
 <p>Some improvements though, we could manage errors better in case the JSON file does not provide the correct information</p>
 
 <p>That&rsquo;s all folks !</p>
-
     </div>
     
       <div class="pagination">

@@ -18,8 +18,11 @@
       <pubDate>Sun, 25 Feb 2018 18:45:26 +0100</pubDate>
       
       <guid>https://victorfleury.github.io/posts/grab_photo_of_the_day/</guid>
-      <description>This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and save it in a specific folder. With a small cron job, it is then ran every day automatically.
-It is not as easy it seems to grab the picture from the web site, as the current hierarchy does not make it easy. However, looking at the source code of the page, we can see this interesting line :</description>
+      <description>&lt;p&gt;This is a small tool I developed to grab the latest image from the &lt;a href=&#34;https://www.nationalgeographic.com/photography/photo-of-the-day/&#34;&gt;National Geographic&amp;rsquo;s&lt;/a&gt; website and save it in a specific folder.
+With a small cron job, it is then ran every day automatically.&lt;/p&gt;
+
+&lt;p&gt;Since no API is being provided, we must scrap the webpage for the information we want.
+However, looking at the source code of the page, we can see this interesting line :&lt;/p&gt;</description>
     </item>
     
     <item>
