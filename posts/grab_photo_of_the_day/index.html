@@ -1,167 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  
-    <title>Grab a nice wallpaper every day :: Plop !</title>
-  
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and save it in a specific folder. With a small cron job, it is then ran every day automatically.
-Since no API is being provided, we must scrap the webpage for the information we want. However, looking at the source code of the page, we can see this interesting line :
-"/>
-<meta name="keywords" content=""/>
-<meta name="robots" content="noodp"/>
-<link rel="canonical" href="https://victorfleury.github.io/posts/grab_photo_of_the_day/" />
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and build a nice photo library of wallpapers.
+It is always nice to start the day with a new nice wallpaper.
+With a small cron job, it is then ran every day automatically.
+There is no API is provided, so we must scrap the webpage for the information we want.
+But with a simple bit of Python it is quite easy to grab these images." />
+<meta name="keywords" content=", python" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://victorfleury.github.io/posts/grab_photo_of_the_day/" />
 
 
-<link rel="stylesheet" href="https://victorfleury.github.io/assets/style.css">
+    <title>
+        
+            Grab a nice wallpaper every day :: Victor Fleury 
+        
+    </title>
 
 
-<link rel="stylesheet" href="https://victorfleury.github.io/style.css">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
 
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://victorfleury.github.io/img/apple-touch-icon-144-precomposed.png">
-<link rel="shortcut icon" href="https://victorfleury.github.io/img/favicon.png">
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Grab a nice wallpaper every day :: Plop ! — " />
-<meta name="twitter:description" content="This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and save it in a specific folder. With a small cron job, it is then ran every day automatically.
-Since no API is being provided, we must scrap the webpage for the information we want. However, looking at the source code of the page, we can see this interesting line :
-" />
-<meta name="twitter:site" content="https://victorfleury.github.io/" />
-<meta name="twitter:creator" content="" />
-<meta name="twitter:image" content="">
-
-
-<meta property="og:locale" content="en" />
-<meta property="og:type" content="article" />
-<meta property="og:title" content="Grab a nice wallpaper every day :: Plop ! — ">
-<meta property="og:description" content="This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and save it in a specific folder. With a small cron job, it is then ran every day automatically.
-Since no API is being provided, we must scrap the webpage for the information we want. However, looking at the source code of the page, we can see this interesting line :
-" />
-<meta property="og:url" content="https://victorfleury.github.io/posts/grab_photo_of_the_day/" />
-<meta property="og:site_name" content="Grab a nice wallpaper every day" />
-<meta property="og:image" content="">
-<meta property="og:image:width" content="2048">
-<meta property="og:image:height" content="1024">
-
-<meta property="article:published_time" content="2018-02-25 18:45:26 &#43;0100 &#43;0100" />
+<link rel="stylesheet" href="/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
 
 
 
 
 
 
+<meta itemprop="name" content="Grab a nice wallpaper every day">
+<meta itemprop="description" content="This is a small tool I developed to grab the latest image from the National Geographic&rsquo;s website and build a nice photo library of wallpapers.
+It is always nice to start the day with a new nice wallpaper.
+With a small cron job, it is then ran every day automatically.
+There is no API is provided, so we must scrap the webpage for the information we want.
+But with a simple bit of Python it is quite easy to grab these images.">
+<meta itemprop="datePublished" content="2018-02-25T18:45:26&#43;01:00" />
+<meta itemprop="dateModified" content="2018-02-25T18:45:26&#43;01:00" />
+<meta itemprop="wordCount" content="979">
 
-</head>
-<body class="">
-<div class="container">
-  <header class="header">
-  <span class="header__inner">
-    <a href="https://victorfleury.github.io/" class="logo" style="text-decoration: none;">
-  
-    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
-  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
-</svg>
-</span>
-    <span class="logo__text">plop !</span>
-    <span class="logo__cursor"></span>
-  
+
+
+<meta itemprop="keywords" content="python," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Grab a nice wallpaper every day"/>
+<meta name="twitter:description" content="This is a small tool I developed to grab the latest image from the National Geographic&rsquo;s website and build a nice photo library of wallpapers.
+It is always nice to start the day with a new nice wallpaper.
+With a small cron job, it is then ran every day automatically.
+There is no API is provided, so we must scrap the webpage for the information we want.
+But with a simple bit of Python it is quite easy to grab these images."/>
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2018-02-25 18:45:26 &#43;0100 &#43;0100" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">plop</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
 </a>
 
-    <span class="header__right">
-      
-        <nav class="menu">
-  <ul class="menu__inner menu__inner--desktop">
-    
-      
-        
-          <li><a href="/">Blog</a></li>
-        
-      
-        
-          <li><a href="/about">About</a></li>
-        
-      
-        
-          <li><a href="/contact">Contact</a></li>
-        
-      
-    
-  </ul>
 
-  <ul class="menu__inner menu__inner--mobile">
-    
-      
-        <li><a href="/">Blog</a></li>
-      
-    
-      
-        <li><a href="/about">About</a></li>
-      
-    
-      
-        <li><a href="/contact">Contact</a></li>
-      
-    
-  </ul>
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://victorfleury.github.io/posts">Blog</a></li><li><a href="http://victorfleury.github.io/about">About</a></li><li><a href="https://www.linkedin.com/in/victorfleury">Resume</a></li>
+    </ul>
 </nav>
 
-        <span class="menu-trigger">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none"/>
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-          </svg>
-        </span>
-      
-      <span class="theme-toggle">
-        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
 </svg>
-
-      </span>
+</span>
+        </span>
     </span>
-  </span>
 </header>
 
 
-  <div class="content">
-    
-  <div class="post">
-    <h2 class="post-title"><a href="https://victorfleury.github.io/posts/grab_photo_of_the_day/">Grab a nice wallpaper every day</a></h2>
-    <div class="post-meta">
-      
-        <span class="post-date">
-            2018-02-25
-        </span>
-      
-      
-      
-    </div>
+            <div class="content">
+                
+    <main class="post">
 
-    
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
 
-    
+            
 
-    <div class="post-content">
-      <p>This is a small tool I developed to grab the latest image from the <a href="https://www.nationalgeographic.com/photography/photo-of-the-day/">National Geographic&rsquo;s</a> website and save it in a specific folder.
-With a small cron job, it is then ran every day automatically.</p>
+            </p>
+        </div>
 
-<p>Since no API is being provided, we must scrap the webpage for the information we want.
-However, looking at the source code of the page, we can see this interesting line :</p>
+        <article>
+            <h1 class="post-title">
+                <a href="http://victorfleury.github.io/posts/grab_photo_of_the_day/">Grab a nice wallpaper every day</a>
+            </h1>
 
+            
+
+            <div class="post-content">
+                <p>This is a small tool I developed to grab the latest image from the <a href="https://www.nationalgeographic.com/photography/photo-of-the-day/">National Geographic&rsquo;s</a> website and build a nice photo library of wallpapers.</p>
+<p>It is always nice to start the day with a new nice wallpaper.</p>
+<p>With a small <code>cron job</code>, it is then ran every day automatically.</p>
+<p>There is no API is provided, so we must scrap the webpage for the information we want.</p>
+<p>But with a simple bit of Python it is quite easy to grab these images.</p>
+<p>Let&rsquo;s inspect the page to find the interesting part.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">data-pestle-module</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;infiniteGallery&#34;</span>&gt;
-        &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/json&#34;</span> <span style="color:#a6e22e">data-pestle-options</span>&gt;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">            {&#34;id&#34;:&#34;OwFPp5uL&#34;,&#34;firstImage&#34;:&#34;https://www.nationalgeographic.com/photography/photo-of-the-day/2018/02/pakistan-coal-miner-portrait&#34;,&#34;endpoint&#34;:&#34;https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.2018-02.json&#34;,......</span></code></pre></div>
-<p>Here what we are interested in, is the JSON file.
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/json&#34;</span> <span style="color:#a6e22e">data-pestle-options</span>&gt;
+        {&#34;id&#34;:&#34;OwFPp5uL&#34;,&#34;firstImage&#34;:&#34;https://www.nationalgeographic.com/photography/photo-of-the-day/2018/02/pakistan-coal-miner-portrait&#34;,&#34;endpoint&#34;:&#34;https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.2018-02.json&#34;,......
+</code></pre></div><p>Here what we are interested in, is the JSON file.
 Inspecting it in Firefox gives us a good overview of the content.
-We can see that there is one file per month of the year based on the naming convention : <code>.gallery.2018-02.json</code></p>
-
-<p>The file contains a list of <code>items</code> which are described as follow : (The descriptions are only wild guesses.)</p>
-
+We can see that there is one file per month of the year based on the naming convention : <code>.gallery.&lt;YEAR-MONTH&gt;.json</code></p>
+<p>The file contains a list of <code>items</code>. The useful ones are described as follow : <em>(The descriptions are only wild guesses.)</em></p>
 <ul>
 <li><code>index</code> : a sorting index</li>
 <li><code>title</code> : title of the photo</li>
@@ -177,22 +167,18 @@ We can see that there is one file per month of the year based on the naming conv
 <li><code>internal</code></li>
 <li><code>pageUrl</code></li>
 <li><code>publishDate</code> : date of publication</li>
-<li><code>yourShot</code></li>
-<li><code>social</code></li>
 </ul>
-
 <p>The attribute we are going to look at more closely is the <code>size</code> one. It contains a dictionary with key/value as the size/url to the picture.</p>
-
 <p>It is then easy to write a small function that will extract the data from the JSON file and download the picture and save it wherever you want.</p>
-
 <p>Here is the simple code to get today&rsquo;s photo :</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
 <span style="color:#f92672">import</span> json
 <span style="color:#f92672">import</span> logging
 <span style="color:#f92672">import</span> os
-<span style="color:#f92672">import</span> urllib
-<span style="color:#f92672">import</span> time
 <span style="color:#f92672">from</span> optparse <span style="color:#f92672">import</span> OptionParser
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> urllib
+
 
 logging<span style="color:#f92672">.</span>basicConfig()
 LOGGER <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger()
@@ -216,16 +202,13 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
 </span><span style="color:#e6db74">    Return:
 </span><span style="color:#e6db74">        bool: True if successful otherwise False
 </span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-
-    <span style="color:#f92672">from</span> pprint <span style="color:#f92672">import</span> pprint
-    <span style="color:#75715e"># pprint(item)fa</span>
     sizes <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;sizes&#39;</span>, None)
     <span style="color:#66d9ef">if</span> sizes:
         url_part <span style="color:#f92672">=</span> sizes[size]
     <span style="color:#66d9ef">else</span>:
         url_part <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;url&#39;</span>)
 
-    photo_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(url_part)
+    photo_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{0}&#39;</span><span style="color:#f92672">.</span>format(url_part)
 
     raw_date <span style="color:#f92672">=</span> item[<span style="color:#e6db74">&#39;publishDate&#39;</span>]
     converted <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>strptime(raw_date, <span style="color:#e6db74">&#39;%B </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">, %Y&#39;</span>)
@@ -234,20 +217,22 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(base):
             os<span style="color:#f92672">.</span>makedirs(base)
         <span style="color:#75715e"># Photo already exists and no need to download it again</span>
-        <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;{}{}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output)) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> force:
+        <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;{0}{1}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output)) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> force:
             LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;  * File already exists on disk.&#39;</span>)
             <span style="color:#66d9ef">return</span> True
         urllib<span style="color:#f92672">.</span>urlretrieve(
             photo_url,
-            <span style="color:#e6db74">&#39;{}{}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output),
+            <span style="color:#e6db74">&#39;{0}{1}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output),
         )
-        LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;  * File successfully retrieved.&#39;</span>)
+        LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;File successfully retrieved.&#39;</span>)
     <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">IOError</span>:
-        LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;  * Could not save file...&#39;</span>)
+        LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;Could not save file...&#39;</span>)
         <span style="color:#66d9ef">return</span> False
 
-    <span style="color:#66d9ef">return</span> True</code></pre></div>
-<p>From there, we can modify the script to retrieve all the photos from the month and add a bit of command line interface with a parser, to look for the size we want to download :</p>
+    <span style="color:#66d9ef">return</span> True
+</code></pre></div><p>From there, we can modify the script to retrieve all the photos from the month
+and add a bit of a command line interface with a parser, to look for the size we
+want to download :</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
 <span style="color:#f92672">import</span> json
 <span style="color:#f92672">import</span> logging
@@ -272,22 +257,19 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
 </span><span style="color:#e6db74">    will download the picture.
 </span><span style="color:#e6db74">    Args:
 </span><span style="color:#e6db74">        item(dict): The dictionary representing the item
-</span><span style="color:#e6db74">        size(str): The size we cant to download.
+</span><span style="color:#e6db74">        size(str): The size we can to download.
 </span><span style="color:#e6db74">        base(str): The base of the path where images will be saved.
 </span><span style="color:#e6db74">        force(bool): Force overwrite of the image if it is already on disk.
 </span><span style="color:#e6db74">    Return:
 </span><span style="color:#e6db74">        bool: True if successful otherwise False
 </span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-
-    <span style="color:#f92672">from</span> pprint <span style="color:#f92672">import</span> pprint
-    <span style="color:#75715e"># pprint(item)fa</span>
     sizes <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;sizes&#39;</span>, None)
     <span style="color:#66d9ef">if</span> sizes:
         url_part <span style="color:#f92672">=</span> sizes[size]
     <span style="color:#66d9ef">else</span>:
         url_part <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;url&#39;</span>)
 
-    photo_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(url_part)
+    photo_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{0}&#39;</span><span style="color:#f92672">.</span>format(url_part)
 
     raw_date <span style="color:#f92672">=</span> item[<span style="color:#e6db74">&#39;publishDate&#39;</span>]
     converted <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>strptime(raw_date, <span style="color:#e6db74">&#39;%B </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">, %Y&#39;</span>)
@@ -296,16 +278,16 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(base):
             os<span style="color:#f92672">.</span>makedirs(base)
         <span style="color:#75715e"># Photo already exists and no need to download it again</span>
-        <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;{}{}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output)) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> force:
-            LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;  * File already exists on disk.&#39;</span>)
+        <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;{0}{1}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output)) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> force:
+            LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;File already exists on disk.&#39;</span>)
             <span style="color:#66d9ef">return</span> True
         urllib<span style="color:#f92672">.</span>urlretrieve(
             photo_url,
-            <span style="color:#e6db74">&#39;{}{}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output),
+            <span style="color:#e6db74">&#39;{0}{1}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output),
         )
-        LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;  * File successfully retrieved.&#39;</span>)
+        LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;File successfully retrieved.&#39;</span>)
     <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">IOError</span>:
-        LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;  * Could not save file...&#39;</span>)
+        LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;Could not save file...&#39;</span>)
         <span style="color:#66d9ef">return</span> False
 
     <span style="color:#66d9ef">return</span> True
@@ -321,12 +303,11 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
 </span><span style="color:#e6db74">        force(bool): Force the download and save of the picture even if it is
 </span><span style="color:#e6db74">            already present.
 </span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-
     <span style="color:#75715e"># Checking the size</span>
     <span style="color:#66d9ef">if</span> size <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;1024&#39;</span>, <span style="color:#e6db74">&#39;1600&#39;</span>, <span style="color:#e6db74">&#39;2048&#39;</span>, <span style="color:#e6db74">&#39;640&#39;</span>, <span style="color:#e6db74">&#39;320&#39;</span>, <span style="color:#e6db74">&#39;240&#39;</span>, <span style="color:#e6db74">&#39;800&#39;</span>, <span style="color:#e6db74">&#39;500&#39;</span>]:
         <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74">&#39;Size is not valid.&#39;</span>)
     LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;About to retrieve data...&#39;</span>)
-    
+
     <span style="color:#75715e"># Getting the date and the month</span>
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> year <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> month:
         today_date <span style="color:#f92672">=</span> year <span style="color:#f92672">or</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>today()
@@ -338,7 +319,7 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
     <span style="color:#75715e"># Retrieving the json file</span>
     json_file_name <span style="color:#f92672">=</span> DATA_FORMAT<span style="color:#f92672">.</span>format(YEAR<span style="color:#f92672">=</span>year, MONTH<span style="color:#f92672">=</span>month)
 
-    json_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{}{}&#39;</span><span style="color:#f92672">.</span>format(JSON_ROOT_URL, json_file_name)
+    json_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{0}{1}&#39;</span><span style="color:#f92672">.</span>format(JSON_ROOT_URL, json_file_name)
 
     response <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>urlopen(json_url)
     photos_data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(response<span style="color:#f92672">.</span>read())
@@ -353,9 +334,7 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
             <span style="color:#e6db74">&#39;Retrieving {0}/{1}&#39;</span><span style="color:#f92672">.</span>format(index<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, len(photos_data[<span style="color:#e6db74">&#39;items&#39;</span>]))
         )
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> get_picture(item<span style="color:#f92672">=</span>item, size<span style="color:#f92672">=</span>size, force<span style="color:#f92672">=</span>force):
-            LOGGER<span style="color:#f92672">.</span>error(
-                <span style="color:#e6db74">&#39;[ERROR] Could not retrieve : {0}&#39;</span><span style="color:#f92672">.</span>format(item[<span style="color:#e6db74">&#39;publishDate&#39;</span>])
-            )
+            LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;Could not retrieve : {0}&#39;</span><span style="color:#f92672">.</span>format(item[<span style="color:#e6db74">&#39;publishDate&#39;</span>]))
 
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     <span style="color:#f92672">import</span> sys
@@ -397,59 +376,81 @@ ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
         year<span style="color:#f92672">=</span>options<span style="color:#f92672">.</span>year,
         month<span style="color:#f92672">=</span>options<span style="color:#f92672">.</span>month,
         force<span style="color:#f92672">=</span>options<span style="color:#f92672">.</span>force
-    )</code></pre></div>
-<p>Now you just run it like this in a console :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terminal" data-lang="terminal">$ python daily_photo.py</code></pre></div>
-<p>Or with arguments :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terminal" data-lang="terminal">$ python daily_photo.py --size 2048 --year 2018 --month 08</code></pre></div>
-<p>Et voilà !</p>
+    )
 
-<p>There you have all the photos of the day of the month.</p>
-
-<p>Some improvements though, we could manage errors better in case the JSON file does not provide the correct information</p>
-
+</code></pre></div><p>Now you just run it like this in a console :</p>
+<pre><code class="language-terminal" data-lang="terminal">$ python daily_photo.py
+</code></pre><p>Or with arguments :</p>
+<pre><code class="language-terminal" data-lang="terminal">$ python daily_photo.py --size 2048 --year 2018 --month 08
+</code></pre><p>Et voilà !</p>
+<p>There you have all the <em>photos of the day</em> of the month.</p>
+<p>Some improvements though, we could manage errors better in case the JSON file does not provide the correct size information, etc&hellip;</p>
 <p>That&rsquo;s all folks !</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://victorfleury.github.io/tags/python">python</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>979 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2018-02-25 12:45 -0500</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Read other posts</span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="http://victorfleury.github.io/posts/qt_drag_n_drop/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Implementing drag and drop in Python using Qt</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+            <span>Made with &#10084; using hugo</span>
+            <span> <a href="http://victorfleury.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
     </div>
     
-      <div class="pagination">
-        <div class="pagination__title">
-          <span class="pagination__title-h">Read other posts</span>
-          <hr />
-        </div>
-        <div class="pagination__buttons">
-          
-          
-            <span class="button next">
-              <a href="https://victorfleury.github.io/posts/my-first-post/">
-                <span class="button__text">Hello world</span>
-                <span class="button__icon">→</span>
-              </a>
-            </span>
-          
-        </div>
-      </div>
-    
-
-    
-
-    </div>
-
-  </div>
-
-  
-    <footer class="footer">
-  <div class="footer__inner">
-    
-      <div class="copyright copyright--user">Made with <3 with hugo</div>
-    
-  </div>
 </footer>
 
-<script src="https://victorfleury.github.io/assets/main.js"></script>
-<script src="https://victorfleury.github.io/assets/prism.js"></script>
+            
+        </div>
 
-  
-</div>
+        
 
-</body>
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
 </html>

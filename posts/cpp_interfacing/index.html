@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="How to interface C&#43;&#43; code with Python ? This is a quick how-to for :
+ Installing pybind on WSL (which should work on Linux in general) Writing a small piece of code in C&#43;&#43; Compiling and building the lib to expose in Python Using said lib.  The purpose of this is mainly to play with C&#43;&#43; and Python and see how the two can be interfaced so you can benefit from the speed of C&#43;&#43; via Python and vice-versa." />
+<meta name="keywords" content=", python, c&#43;&#43;" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://victorfleury.github.io/posts/cpp_interfacing/" />
+
+
+    <title>
+        
+            Interfacing C&#43;&#43; and Python :: Victor Fleury 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+
+
+<meta itemprop="name" content="Interfacing C&#43;&#43; and Python">
+<meta itemprop="description" content="How to interface C&#43;&#43; code with Python ? This is a quick how-to for :
+ Installing pybind on WSL (which should work on Linux in general) Writing a small piece of code in C&#43;&#43; Compiling and building the lib to expose in Python Using said lib.  The purpose of this is mainly to play with C&#43;&#43; and Python and see how the two can be interfaced so you can benefit from the speed of C&#43;&#43; via Python and vice-versa.">
+<meta itemprop="datePublished" content="2020-06-15T21:19:18-04:00" />
+<meta itemprop="dateModified" content="2020-06-15T21:19:18-04:00" />
+<meta itemprop="wordCount" content="539">
+
+
+
+<meta itemprop="keywords" content="python,c&#43;&#43;," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Interfacing C&#43;&#43; and Python"/>
+<meta name="twitter:description" content="How to interface C&#43;&#43; code with Python ? This is a quick how-to for :
+ Installing pybind on WSL (which should work on Linux in general) Writing a small piece of code in C&#43;&#43; Compiling and building the lib to expose in Python Using said lib.  The purpose of this is mainly to play with C&#43;&#43; and Python and see how the two can be interfaced so you can benefit from the speed of C&#43;&#43; via Python and vice-versa."/>
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-06-15 21:19:18 -0400 EDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">plop</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://victorfleury.github.io/posts">Blog</a></li><li><a href="http://victorfleury.github.io/about">About</a></li><li><a href="https://www.linkedin.com/in/victorfleury">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>3 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="http://victorfleury.github.io/posts/cpp_interfacing/">Interfacing C++ and Python</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <h3 id="how-to-interface-c-code-with-python-">How to interface C++ code with Python ?</h3>
+<p>This is a quick <em>how-to</em> for :</p>
+<ul>
+<li>Installing <code>pybind</code> on WSL (which should work on Linux in general)</li>
+<li>Writing a small piece of code in C++</li>
+<li>Compiling and building the lib to expose in Python</li>
+<li>Using said lib.</li>
+</ul>
+<p>The purpose of this is mainly to play with C++ and Python and see how the two can
+be interfaced so you can benefit from the speed of C++ via Python and vice-versa.</p>
+<p>It works both ways !</p>
+<p>A quick list of the various libraries to do that :</p>
+<ul>
+<li><a href="https://www.boost.org/">Boost</a></li>
+<li><a href="https://github.com/pybind/pybind11">PyBind</a></li>
+<li><a href="https://cython.org/">Cython</a></li>
+</ul>
+<p>And probably many more but I stumbled mainly upon those while searching the internet.</p>
+<p>I chose to go with <strong>pybind</strong> as it is advertised as a simplified Boost.</p>
+<h3 id="1-installing-pybind">1. Installing pybind</h3>
+<p>Pre-requisites :</p>
+<ul>
+<li>python3-dev : Python dev package</li>
+<li>python&lt;version_number&gt;-dev</li>
+<li><a href="https://cmake.org/">cmake</a> : Tool to build, test, package software</li>
+<li>g++ : Compiler but that should be installed on any linux distro.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get install python3-dev cmake
+</code></pre></div><p>On my first try using the library, I ran into an issue where C++ couldn&rsquo;t find the Python headers it needed.
+So I had to specifically install the <code>python-dev</code> package that matched my Python version :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get install python3.6-dev
+</code></pre></div><p>First we need to clone the repository :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone git@github.com:pybind/pybind11.git
+$ cd pybind11
+</code></pre></div><p>The next step is to <code>build</code> the lib.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir build
+$ cd build
+$ cmake ..
+$ make install
+</code></pre></div><p>We also need to install the python package for <code>pybind</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pip3 install pybind11
+</code></pre></div><p>After that we should pretty much be all set.</p>
+<h3 id="2-writing-a-small-example">2. Writing a small example</h3>
+<p>This is directly and shamelessly taken from the documentation :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pybind11/pybind11.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">namespace</span> py <span style="color:#f92672">=</span> pybind11;
+
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+    <span style="color:#66d9ef">return</span> i <span style="color:#f92672">+</span> j;
+}
+
+PYBIND11_MODULE(example, m) {
+    m.doc() <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pybind11 example plugin&#34;</span>; <span style="color:#75715e">// optional module docstring
+</span><span style="color:#75715e"></span>
+    m.def(<span style="color:#e6db74">&#34;add&#34;</span>, <span style="color:#f92672">&amp;</span>add, <span style="color:#e6db74">&#34;A function which adds two numbers&#34;</span>);
+}
+</code></pre></div><h3 id="3-compiling-and-building-the-example">3. Compiling and building the example</h3>
+<p>To run the example this what the <code>pybind</code> doc says :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ g++ -O3 -Wall -shared -std<span style="color:#f92672">=</span>c++11 -fPIC <span style="color:#e6db74">`</span>python3 -m pybind11 --includes<span style="color:#e6db74">`</span> example.cpp -o example<span style="color:#e6db74">`</span>python3-config --extension-suffix<span style="color:#e6db74">`</span>
+</code></pre></div><p>The flags given here specify that we use Python3.</p>
+<p>The <code>-fPIC</code> flag is there to specify the path to the <code>pybind</code> headers.
+<code>pybind</code> comes with a sort of a convenient method to fill that out for us.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">$</span> python3 <span style="color:#f92672">-</span>m pybind11 <span style="color:#f92672">--</span>includes
+<span style="color:#f92672">-</span>I<span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>include<span style="color:#f92672">/</span>python3<span style="color:#f92672">.</span><span style="color:#ae81ff">6</span>m <span style="color:#f92672">-</span>I<span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>lib<span style="color:#f92672">/</span>python3<span style="color:#f92672">.</span><span style="color:#ae81ff">6</span><span style="color:#f92672">/</span>dist<span style="color:#f92672">-</span>packages<span style="color:#f92672">/</span>pybind11<span style="color:#f92672">/</span>include
+</code></pre></div><p>Same goes for the extension of the library we are building :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python3-config --extension-suffix
+.cpython-36m-x86_64-linux-gnu.so
+</code></pre></div><h3 id="4-running-the-python-code">4. Running the Python code</h3>
+<p>What is left to do is just to use the Python library :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">❯</span> python3
+Python <span style="color:#ae81ff">3.6</span><span style="color:#f92672">.</span><span style="color:#ae81ff">9</span> (default, Apr <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">2020</span>, <span style="color:#ae81ff">01</span>:<span style="color:#ae81ff">56</span>:<span style="color:#ae81ff">04</span>)
+[GCC <span style="color:#ae81ff">8.4</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span>] on linux
+Type <span style="color:#e6db74">&#34;help&#34;</span>, <span style="color:#e6db74">&#34;copyright&#34;</span>, <span style="color:#e6db74">&#34;credits&#34;</span> <span style="color:#f92672">or</span> <span style="color:#e6db74">&#34;license&#34;</span> <span style="color:#66d9ef">for</span> more information<span style="color:#f92672">.</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">import</span> example
+<span style="color:#f92672">&gt;&gt;&gt;</span> help(example)
+Help on module example:
+
+NAME
+    example <span style="color:#f92672">-</span> pybind11 example plugin
+
+FUNCTIONS
+    add(<span style="color:#f92672">...</span>) method of builtins<span style="color:#f92672">.</span>PyCapsule instance
+        add(arg0: int, arg1: int) <span style="color:#f92672">-&gt;</span> int
+
+        A function which adds two numbers
+
+FILE
+    <span style="color:#f92672">/</span>path<span style="color:#f92672">/</span>to<span style="color:#f92672">/</span>lib<span style="color:#f92672">/</span>example<span style="color:#f92672">.</span>cpython<span style="color:#f92672">-</span><span style="color:#ae81ff">36</span>m<span style="color:#f92672">-</span>x86_64<span style="color:#f92672">-</span>linux<span style="color:#f92672">-</span>gnu<span style="color:#f92672">.</span>so
+
+<span style="color:#f92672">&gt;&gt;&gt;</span> example<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+<span style="color:#ae81ff">3</span>
+</code></pre></div><p>And tada we got a wonderful lib to add integers in C++ accessible from Python !</p>
+<p>Next time we can look at building a small project example to dive more into classes, and OOP in C++
+and exposing those to Python.</p>
+<h3 id="useful-links">Useful links</h3>
+<ul>
+<li>pybind docs : <a href="https://pybind11.readthedocs.io/en/master/basics.html">https://pybind11.readthedocs.io/en/master/basics.html</a></li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://victorfleury.github.io/tags/python">python</a></span><span class="tag"><a href="http://victorfleury.github.io/tags/c&#43;&#43;">c&#43;&#43;</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>539 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-06-15 21:19 -0400</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Read other posts</span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="http://victorfleury.github.io/posts/qt_drag_n_drop/">
+                                <span class="button__text">Implementing drag and drop in Python using Qt</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+            <span>Made with &#10084; using hugo</span>
+            <span> <a href="http://victorfleury.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>
