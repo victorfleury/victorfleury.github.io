@@ -7,12 +7,11 @@
 <meta name="author" content="">
 <meta name="description" content="Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.
 I had to implement this using a model/view approach with Qt.
-Here is the official doc : Qt Model/View 
-Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model needs in order to implement this correctly." />
+Here is the official doc : Qt Model/View Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model needs in order to implement this correctly." />
 <meta name="keywords" content=", python, Qt, PySide" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
-<link rel="canonical" href="http://victorfleury.github.io/posts/qt_drag_n_drop/" />
+<link rel="canonical" href="http://example.org/posts/qt_drag_n_drop/" />
 
 
     <title>
@@ -23,36 +22,33 @@ Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model ne
 
 
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
-    type="text/css">
+
+
+<link rel="stylesheet" href="/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
 
 
 
-<link rel="stylesheet" href="/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
-
-
-
-
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
 
 
 <meta itemprop="name" content="Implementing drag and drop in Python using Qt">
 <meta itemprop="description" content="Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.
 I had to implement this using a model/view approach with Qt.
-Here is the official doc : Qt Model/View 
-Let&rsquo;s get started ! So first let&rsquo;s look at what the model needs in order to implement this correctly.">
-<meta itemprop="datePublished" content="2020-06-14T20:55:41-05:00" />
+Here is the official doc : Qt Model/View Let&rsquo;s get started ! So first let&rsquo;s look at what the model needs in order to implement this correctly."><meta itemprop="datePublished" content="2020-06-14T20:55:41-05:00" />
 <meta itemprop="dateModified" content="2020-06-14T20:55:41-05:00" />
 <meta itemprop="wordCount" content="888">
-
-
-
 <meta itemprop="keywords" content="python,Qt,PySide," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Implementing drag and drop in Python using Qt"/>
 <meta name="twitter:description" content="Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.
 I had to implement this using a model/view approach with Qt.
-Here is the official doc : Qt Model/View 
-Let&rsquo;s get started ! So first let&rsquo;s look at what the model needs in order to implement this correctly."/>
+Here is the official doc : Qt Model/View Let&rsquo;s get started ! So first let&rsquo;s look at what the model needs in order to implement this correctly."/>
 
 
 
@@ -69,17 +65,24 @@ Let&rsquo;s get started ! So first let&rsquo;s look at what the model needs in o
 
 
 
+
+
+
     </head>
 
-    <body class="">
+    
+        <body>
+    
+    
         <div class="container">
             <header class="header">
     <span class="header__inner">
         <a href="/" style="text-decoration: none;">
     <div class="logo">
         
-            <span class="logo__mark">></span>
-            <span class="logo__text">plop</span>
+            <span class="logo__mark">$</span>
+            <span class="logo__text ">
+                plop</span>
             <span class="logo__cursor" style=
                   "
                    
@@ -93,7 +96,7 @@ Let&rsquo;s get started ! So first let&rsquo;s look at what the model needs in o
         <span class="header__right">
             
                 <nav class="menu">
-    <ul class="menu__inner"><li><a href="http://victorfleury.github.io/posts">Blog</a></li><li><a href="http://victorfleury.github.io/about">About</a></li><li><a href="https://www.linkedin.com/in/victorfleury">Resume</a></li>
+    <ul class="menu__inner"><li><a href="/posts">Blog</a></li><li><a href="/about">About</a></li><li><a href="/now">Now</a></li><li><a href="/like">Like</a></li>
     </ul>
 </nav>
 
@@ -104,13 +107,11 @@ Let&rsquo;s get started ! So first let&rsquo;s look at what the model needs in o
                     </svg>
                 </span>
             
-
-            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
-  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
-</svg>
-</span>
+                <span class="theme-toggle not-selectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+ </svg></span>
         </span>
     </span>
 </header>
@@ -118,25 +119,33 @@ Let&rsquo;s get started ! So first let&rsquo;s look at what the model needs in o
 
             <div class="content">
                 
-    <main class="post">
+  <main class="post">
 
-        <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        5 minutes
 
-            
+        
+      </p>
+    </div>
 
-            </p>
-        </div>
+    <article>
+      <h1 class="post-title">
+        <a href="http://example.org/posts/qt_drag_n_drop/">Implementing drag and drop in Python using Qt</a>
+      </h1>
 
-        <article>
-            <h1 class="post-title">
-                <a href="http://victorfleury.github.io/posts/qt_drag_n_drop/">Implementing drag and drop in Python using Qt</a>
-            </h1>
+      
 
-            
+      
 
-            <div class="post-content">
-                <p>Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.</p>
+      
+
+      <div class="post-content">
+        <p>Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.</p>
 <p>I had to implement this using a model/view approach with <code>Qt</code>.</p>
 <p>Here is the official doc : <a href="https://doc.qt.io/qt-5/model-view-programming.html">Qt Model/View </a></p>
 <h2 id="lets-get-started-">Let&rsquo;s get started !</h2>
@@ -155,55 +164,55 @@ Let&rsquo;s get started ! So first let&rsquo;s look at what the model needs in o
 <p>First, we need to reimplement the <code>mimeTypes()</code> method to let our model know that
 it will only need to act if a certain type of data is dragged or dropped.
 By default, the built-in models and views use an internal MIME type: application/x-qabstractitemmodeldatalist.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FoobarModel</span>(QtCore<span style="color:#f92672">.</span>QAbstractListModel):
-    MIME_TYPES_ACCEPTED <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/foobar_data&#39;</span>
-    <span style="color:#75715e"># ...</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mimeTypes</span>(self):
-        <span style="color:#e6db74">&#34;&#34;&#34;Return a list of MIME types used to describe a list of indices.
-</span><span style="color:#e6db74">        Returns:
-</span><span style="color:#e6db74">            list(str): A list of accepted mime types.
-</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
-        <span style="color:#66d9ef">return</span> [self<span style="color:#f92672">.</span>MIME_TYPES_ACCEPTED]
-</code></pre></div><p>Since we defined a custom <code>mimeTypes()</code> we need to implement the <code>mimeData()</code> and <code>dropMimeData()</code> functions as well.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FoobarModel</span>(QtCore<span style="color:#f92672">.</span>QAbstractListModel):
+</span></span><span style="display:flex;"><span>    MIME_TYPES_ACCEPTED <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/foobar_data&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mimeTypes</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Return a list of MIME types used to describe a list of indices.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            list(str): A list of accepted mime types.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [self<span style="color:#f92672">.</span>MIME_TYPES_ACCEPTED]
+</span></span></code></pre></div><p>Since we defined a custom <code>mimeTypes()</code> we need to implement the <code>mimeData()</code> and <code>dropMimeData()</code> functions as well.</p>
 <p>According to the documentation :</p>
-<pre><code>Returns an object that contains serialized items of data
-corresponding to the list of indexes specified.
-The format used to describe the encoded data is obtained from the mimeTypes()
-function.
-</code></pre><p>So we need to create an object that will contain serialized data and that is the <code>QMimeData</code> object.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Returns an object that contains serialized items of data
+</span></span><span style="display:flex;"><span>corresponding to the list of indexes specified.
+</span></span><span style="display:flex;"><span>The format used to describe the encoded data is obtained from the mimeTypes<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span>.
+</span></span></code></pre></div><p>So we need to create an object that will contain serialized data and that is the <code>QMimeData</code> object.</p>
 <p>According to the documentation again :</p>
-<pre><code>QMimeData is used to describe information that can be stored in the clipboard,
-and transferred via the drag and drop mechanism.
-QMimeData objects associate the data that they hold with the corresponding MIME
-types to ensure that information can be safely transferred between applications
-and copied around within the same application.
-</code></pre><p>Its data is stored as <code>QByteArray</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mimeData</span>(self, indexes):
-    mime_data <span style="color:#f92672">=</span> QtCore<span style="color:#f92672">.</span>QMimeData()
-    data <span style="color:#f92672">=</span> QtCore<span style="color:#f92672">.</span>QByteArray()
-
-    <span style="color:#66d9ef">for</span> index <span style="color:#f92672">in</span> indexes:
-        <span style="color:#66d9ef">if</span> index<span style="color:#f92672">.</span>isValid():
-            data<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;/{0}&#34;</span><span style="color:#f92672">.</span>format(index<span style="color:#f92672">.</span>row()))
-
-    mime_data<span style="color:#f92672">.</span>setData(self<span style="color:#f92672">.</span>MIME_VERSION, data)
-
-    <span style="color:#66d9ef">return</span> mime_data
-</code></pre></div><p>The data is stored as a plain string.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>QMimeData is used to describe information that can be stored in the clipboard,
+</span></span><span style="display:flex;"><span>and transferred via the drag and drop mechanism.
+</span></span><span style="display:flex;"><span>QMimeData objects associate the data that they hold with the corresponding MIME
+</span></span><span style="display:flex;"><span>types to ensure that information can be safely transferred between applications
+</span></span><span style="display:flex;"><span>and copied around within the same application.
+</span></span></code></pre></div><p>Its data is stored as <code>QByteArray</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mimeData</span>(self, indexes):
+</span></span><span style="display:flex;"><span>    mime_data <span style="color:#f92672">=</span> QtCore<span style="color:#f92672">.</span>QMimeData()
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> QtCore<span style="color:#f92672">.</span>QByteArray()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> index <span style="color:#f92672">in</span> indexes:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> index<span style="color:#f92672">.</span>isValid():
+</span></span><span style="display:flex;"><span>            data<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;/</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(index<span style="color:#f92672">.</span>row()))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mime_data<span style="color:#f92672">.</span>setData(self<span style="color:#f92672">.</span>MIME_VERSION, data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mime_data
+</span></span></code></pre></div><p>The data is stored as a plain string.
 It can be a good idea to use a delimiter. That way we can store data for multiple rows and split it when processing the drop.</p>
 <h3 id="what-kind-of-drop-can-i-do">What kind of drop can I do?</h3>
 <p>We need to also define in the model what kind of drop it supports.</p>
 <p>The default is the <code>QtCore.Qt.CopyAction</code> but I wanted to move things around hence the use of :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">supportedDropActions</span>(self):
-    <span style="color:#66d9ef">return</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>MoveAction
-</code></pre></div><h3 id="what-can-be-dragged-">What can be dragged ?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">supportedDropActions</span>(self):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>MoveAction
+</span></span></code></pre></div><h3 id="what-can-be-dragged-">What can be dragged ?</h3>
 <p>To define which items can be dragged we need to implement the <code>flags()</code> method.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flags</span>(self, index):
-    flags <span style="color:#f92672">=</span> super(FoobarModel, self)<span style="color:#f92672">.</span>flags(index)
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> index<span style="color:#f92672">.</span>isValid():
-        <span style="color:#66d9ef">return</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemIsEnabled <span style="color:#f92672">|</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemIsDropEnabled <span style="color:#f92672">|</span> flags
-    <span style="color:#66d9ef">return</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemFlags(QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemIsDragEnabled <span style="color:#f92672">|</span> flags)
-</code></pre></div><p>With this we are doing two things :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flags</span>(self, index):
+</span></span><span style="display:flex;"><span>    flags <span style="color:#f92672">=</span> super(FoobarModel, self)<span style="color:#f92672">.</span>flags(index)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> index<span style="color:#f92672">.</span>isValid():
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemIsEnabled <span style="color:#f92672">|</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemIsDropEnabled <span style="color:#f92672">|</span> flags
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemFlags(QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemIsDragEnabled <span style="color:#f92672">|</span> flags)
+</span></span></code></pre></div><p>With this we are doing two things :</p>
 <ul>
 <li>We first grab the defaults flags from the model.</li>
 <li>We enhance the default flags to add the <code>QtCore.Qt.ItemIsDragEnabled</code></li>
@@ -212,18 +221,18 @@ then its flags are extended to support it with <code>QtCore.Qt.ItemIsDropEnabled
 </ul>
 <h3 id="insert-rows-and-remove-them">Insert rows and remove them</h3>
 <p>The next thing we need to implement now is the insertion and removal of the rows :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">insertRows</span>(self, row, count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, parent<span style="color:#f92672">=</span>QtCore<span style="color:#f92672">.</span>QModelIndex()):
-    self<span style="color:#f92672">.</span>beginInsertRows(parent, row, row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
-    self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;Foo {0}&#39;</span><span style="color:#f92672">.</span>format(str(row)<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">4</span>)))
-    self<span style="color:#f92672">.</span>endInsertRows()
-    <span style="color:#66d9ef">return</span> True
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">removeRows</span>(self, row, count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, parent<span style="color:#f92672">=</span>QtCore<span style="color:#f92672">.</span>QModelIndex()):
-    self<span style="color:#f92672">.</span>beginRemoveRows(parent, row, row <span style="color:#f92672">+</span> count <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
-    self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>pop(row)
-    self<span style="color:#f92672">.</span>endRemoveRows()
-    <span style="color:#66d9ef">return</span> True
-</code></pre></div><h3 id="drop-the-stuff">Drop the stuff</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">insertRows</span>(self, row, count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, parent<span style="color:#f92672">=</span>QtCore<span style="color:#f92672">.</span>QModelIndex()):
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>beginInsertRows(parent, row, row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;Foo </span><span style="color:#e6db74">{0}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(str(row)<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">4</span>)))
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>endInsertRows()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">removeRows</span>(self, row, count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, parent<span style="color:#f92672">=</span>QtCore<span style="color:#f92672">.</span>QModelIndex()):
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>beginRemoveRows(parent, row, row <span style="color:#f92672">+</span> count <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>pop(row)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>endRemoveRows()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span></code></pre></div><h3 id="drop-the-stuff">Drop the stuff</h3>
 <p>The dropping of items is handled by the <code>dropMimeData()</code> function.</p>
 <p>Quick note, if you drop things at the very end of the list, the index value might
 be <code>-1</code>, so in the case of our model it needs to be changed to the length of the
@@ -236,55 +245,55 @@ list.</p>
 <li>Remove the selected rows at their current index.</li>
 <li>Insert them at their new indexes.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dropMimeData</span>(
-        self,
-        data,
-        action,
-        row,
-        column<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,
-        parent<span style="color:#f92672">=</span>QtCore<span style="color:#f92672">.</span>QModelIndex()):
-    <span style="color:#66d9ef">if</span> action <span style="color:#f92672">is</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>IgnoreAction:
-        <span style="color:#66d9ef">return</span> False
-
-    indexes_of_items_to_move <span style="color:#f92672">=</span> [
-        i<span style="color:#f92672">.</span>toInt()[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> data<span style="color:#f92672">.</span>data(self<span style="color:#f92672">.</span>MIME_VERSION)<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;/&#39;</span>)[<span style="color:#ae81ff">1</span>:]
-    ]
-    begin_row <span style="color:#f92672">=</span> row
-    dropping_outside <span style="color:#f92672">=</span> False
-    <span style="color:#66d9ef">for</span> item_row <span style="color:#f92672">in</span> indexes_of_items_to_move:
-        <span style="color:#66d9ef">if</span> item_row <span style="color:#f92672">&lt;</span> row:
-            begin_row <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">if</span> row <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:
-        begin_row <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rowCount() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
-        dropping_outside <span style="color:#f92672">=</span> True
-
-    items_to_move <span style="color:#f92672">=</span> sorted(
-        [self<span style="color:#f92672">.</span>_data[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> indexes_of_items_to_move],
-        reverse<span style="color:#f92672">=</span>True,
-    )
-
-    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> items_to_move:
-        self<span style="color:#f92672">.</span>beginRemoveRows(
-            parent, self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>index(item), self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>index(item),
-        )
-        self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>pop(self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>index(item))
-        self<span style="color:#f92672">.</span>endRemoveRows()
-
-    <span style="color:#66d9ef">if</span> dropping_outside:
-        begin_row <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rowCount()
-    self<span style="color:#f92672">.</span>beginInsertRows(
-        QtCore<span style="color:#f92672">.</span>QModelIndex(), begin_row, begin_row <span style="color:#f92672">+</span> len(items_to_move) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
-    )
-    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> items_to_move:
-        self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>insert(begin_row, item)
-    self<span style="color:#f92672">.</span>endInsertRows(),
-
-    first <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>index(begin_row, <span style="color:#ae81ff">0</span>)
-    last <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>index(begin_row <span style="color:#f92672">+</span> len(items_to_move), <span style="color:#ae81ff">0</span>)
-    self<span style="color:#f92672">.</span>dataChanged<span style="color:#f92672">.</span>emit(first, last)
-
-    <span style="color:#66d9ef">return</span> False
-</code></pre></div><h2 id="catch-and-caveats">Catch and Caveats</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dropMimeData</span>(
+</span></span><span style="display:flex;"><span>        self,
+</span></span><span style="display:flex;"><span>        data,
+</span></span><span style="display:flex;"><span>        action,
+</span></span><span style="display:flex;"><span>        row,
+</span></span><span style="display:flex;"><span>        column<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        parent<span style="color:#f92672">=</span>QtCore<span style="color:#f92672">.</span>QModelIndex()):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> action <span style="color:#f92672">is</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>IgnoreAction:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    indexes_of_items_to_move <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">.</span>toInt()[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> data<span style="color:#f92672">.</span>data(self<span style="color:#f92672">.</span>MIME_VERSION)<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;/&#39;</span>)[<span style="color:#ae81ff">1</span>:]
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>    begin_row <span style="color:#f92672">=</span> row
+</span></span><span style="display:flex;"><span>    dropping_outside <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> item_row <span style="color:#f92672">in</span> indexes_of_items_to_move:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> item_row <span style="color:#f92672">&lt;</span> row:
+</span></span><span style="display:flex;"><span>            begin_row <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> row <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        begin_row <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rowCount() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        dropping_outside <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    items_to_move <span style="color:#f92672">=</span> sorted(
+</span></span><span style="display:flex;"><span>        [self<span style="color:#f92672">.</span>_data[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> indexes_of_items_to_move],
+</span></span><span style="display:flex;"><span>        reverse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> items_to_move:
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>beginRemoveRows(
+</span></span><span style="display:flex;"><span>            parent, self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>index(item), self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>index(item),
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>pop(self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>index(item))
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>endRemoveRows()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> dropping_outside:
+</span></span><span style="display:flex;"><span>        begin_row <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rowCount()
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>beginInsertRows(
+</span></span><span style="display:flex;"><span>        QtCore<span style="color:#f92672">.</span>QModelIndex(), begin_row, begin_row <span style="color:#f92672">+</span> len(items_to_move) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> items_to_move:
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>insert(begin_row, item)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>endInsertRows(),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    first <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>index(begin_row, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    last <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>index(begin_row <span style="color:#f92672">+</span> len(items_to_move), <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>dataChanged<span style="color:#f92672">.</span>emit(first, last)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><h2 id="catch-and-caveats">Catch and Caveats</h2>
 <h3 id="i-drop--my-items-but-some-of-my-rows-are-being-removed-">I drop  my items, but some of my rows are being removed !</h3>
 <p>If you take care of the reordering in the <code>dropMimeData()</code> method, be sure to not return <code>True</code> at the end as the Qt documentation is adivsing.
 If you return <code>True</code> then the <code>removeRows()</code> method gets called as the model data has changed.
@@ -295,61 +304,81 @@ And you will end up with rows getting removed although you just wanted to move t
 <script type="application/javascript" src="https://gist.github.com/victorfleury/d895872f0ae7cbff41db636c6e70ae55.js"></script>
 
 
-            </div>
-        </article>
+      </div>
+    </article>
 
-        <hr />
+    <hr />
 
-        <div class="post-info">
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://victorfleury.github.io/tags/python">python</a></span><span class="tag"><a href="http://victorfleury.github.io/tags/qt">Qt</a></span><span class="tag"><a href="http://victorfleury.github.io/tags/pyside">PySide</a></span>
-                </p>
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>888 Words</p>
-
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-06-14 21:55 -0400</p>
-        </div>
-
+        <span class="tag"><a href="http://example.org/tags/python/">python</a></span>
+        <span class="tag"><a href="http://example.org/tags/qt/">Qt</a></span>
+        <span class="tag"><a href="http://example.org/tags/pyside/">PySide</a></span>
         
-            <div class="pagination">
-                <div class="pagination__title">
-                    <span class="pagination__title-h">Read other posts</span>
-                    <hr />
-                </div>
+    </p>
 
-                <div class="pagination__buttons">
-                    
-                        <span class="button previous">
-                            <a href="http://victorfleury.github.io/posts/cpp_interfacing/">
-                                <span class="button__icon">←</span>
-                                <span class="button__text">Interfacing C&#43;&#43; and Python</span>
-                            </a>
-                        </span>
-                    
+      
 
-                    
-                        <span class="button next">
-                            <a href="http://victorfleury.github.io/posts/grab_photo_of_the_day/">
-                                <span class="button__text">Grab a nice wallpaper every day</span>
-                                <span class="button__icon">→</span>
-                            </a>
-                        </span>
-                    
-                </div>
-            </div>
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        888 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
         
-    </main>
+          2020-06-14 21:55
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+  </main>
 
             </div>
 
             
                 <footer class="footer">
+    
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2020</span>
+            <span>&copy; 2024</span>
+            <span><a href="http://example.org/"></a></span>
+            <span>Victor Fleury</span>
+            <span><a href="http://example.org/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
             
-            <span>Made with &#10084; using hugo</span>
-            <span> <a href="http://victorfleury.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Made with &#10084;</span><span>Powered by <a href="http://gohugo.io">Hugo</a></span>
         </div>
     </div>
     
@@ -362,8 +391,8 @@ And you will end up with rows getting removed although you just wanted to move t
 
 
 
+<script type="text/javascript" src="/bundle.min.205d491810c28f95aa953fae884e1c27abe13fdf93ec63b882d0036b248d4a6282eb2d134e4e7225c6ad6e86db87b08488a361ca4a7383d01fcff43f3d57b9c3.js" integrity="sha512-IF1JGBDCj5WqlT&#43;uiE4cJ6vhP9&#43;T7GO4gtADaySNSmKC6y0TTk5yJcatbobbh7CEiKNhykpzg9Afz/Q/PVe5ww=="></script>
 
-<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
 
 
 

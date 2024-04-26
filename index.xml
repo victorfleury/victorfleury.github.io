@@ -2,78 +2,55 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Victor Fleury</title>
-    <link>http://victorfleury.github.io/</link>
+    <link>http://example.org/</link>
     <description>Recent content on Victor Fleury</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Made with &amp;#10084; using hugo</copyright>
-    <lastBuildDate>Mon, 15 Jun 2020 21:19:18 -0400</lastBuildDate>
-    
-	<atom:link href="http://victorfleury.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Interfacing C&#43;&#43; and Python</title>
-      <link>http://victorfleury.github.io/posts/cpp_interfacing/</link>
-      <pubDate>Mon, 15 Jun 2020 21:19:18 -0400</pubDate>
-      
-      <guid>http://victorfleury.github.io/posts/cpp_interfacing/</guid>
-      <description>How to interface C++ code with Python ? This is a quick how-to for :
- Installing pybind on WSL (which should work on Linux in general) Writing a small piece of code in C++ Compiling and building the lib to expose in Python Using said lib.  The purpose of this is mainly to play with C++ and Python and see how the two can be interfaced so you can benefit from the speed of C++ via Python and vice-versa.</description>
-    </item>
-    
+    <copyright>Victor Fleury</copyright>
+    <lastBuildDate>Sun, 14 Jun 2020 20:55:41 -0500</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Implementing drag and drop in Python using Qt</title>
-      <link>http://victorfleury.github.io/posts/qt_drag_n_drop/</link>
+      <link>http://example.org/posts/qt_drag_n_drop/</link>
       <pubDate>Sun, 14 Jun 2020 20:55:41 -0500</pubDate>
       
-      <guid>http://victorfleury.github.io/posts/qt_drag_n_drop/</guid>
+      <guid>http://example.org/posts/qt_drag_n_drop/</guid>
       <description>Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.
 I had to implement this using a model/view approach with Qt.
-Here is the official doc : Qt Model/View 
-Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model needs in order to implement this correctly.</description>
-    </item>
-    
-    <item>
-      <title>Grab a nice wallpaper every day</title>
-      <link>http://victorfleury.github.io/posts/grab_photo_of_the_day/</link>
-      <pubDate>Sun, 25 Feb 2018 18:45:26 +0100</pubDate>
-      
-      <guid>http://victorfleury.github.io/posts/grab_photo_of_the_day/</guid>
-      <description>This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and build a nice photo library of wallpapers.
-It is always nice to start the day with a new nice wallpaper.
-With a small cron job, it is then ran every day automatically.
-There is no API is provided, so we must scrap the webpage for the information we want.
-But with a simple bit of Python it is quite easy to grab these images.</description>
+Here is the official doc : Qt Model/View Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model needs in order to implement this correctly.</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://victorfleury.github.io/about/</link>
+      <link>http://example.org/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://victorfleury.github.io/about/</guid>
-      <description>Hello, I am currently a Pipeline TD at DNEG working on the following projects :
-           RON      100% Wolf       I am mainly focused on Editorial/Layout development, but have knowledge on all areas of the pipeline.
-I have previously worked at Illumination MacGuff, Mikros Animation and Studio100 Animation on the following projects :</description>
+      <guid>http://example.org/about/</guid>
+      <description>About me TL;DR I am a software developer.
+Working at RodeoFX as Lead Pipeline Developer.
+Basically, making data flow and helping artists make pretty pixels.
+Trying to design nice processes and workflows for the team !
+Technology I use and am familiar with : Python Bash Qt/PySide USD Maya Nuke Things I am interested in, and currently learning : Go Rust Places I have worked at RodeoFX in 🇨🇦 DNEG in 🇬🇧 and 🇨🇦 Various studios in 🇫🇷 Cool projects I have worked on Long story I have been working in the VFX industry for over 10 years now and as a software developer for almost 10 years.</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://victorfleury.github.io/resume/</link>
+      <link>http://example.org/like/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://victorfleury.github.io/resume/</guid>
-      <description>Hello world !</description>
+      <guid>http://example.org/like/</guid>
+      <description>Software and tools that I really like bat starship nvim stow tmux fzf kitty git-cliff </description>
     </item>
     
     <item>
-      <title>Archive</title>
-      <link>http://victorfleury.github.io/archive/</link>
+      <title></title>
+      <link>http://example.org/now/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://victorfleury.github.io/archive/</guid>
-      <description>hello World</description>
+      <guid>http://example.org/now/</guid>
+      <description>Now page This is my now page.
+I just stumbled upon this recently and found it quite cool.
+So right now I am :
+A happy dad of two wonderful girls ! Sharing my life with and amazing partner ! Living in 🇨🇦, Montreal QC Working as Lead Pipeline Developer at RodeoFx Learning Golang and Rust. Learning tricks on a fixed gear bike ! Learning to juggle with 4 balls !</description>
     </item>
     
   </channel>

@@ -2,26 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PySide on Victor Fleury</title>
-    <link>http://victorfleury.github.io/tags/pyside/</link>
+    <link>http://example.org/tags/pyside/</link>
     <description>Recent content in PySide on Victor Fleury</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Made with &amp;#10084; using hugo</copyright>
-    <lastBuildDate>Sun, 14 Jun 2020 20:55:41 -0500</lastBuildDate>
-    
-	<atom:link href="http://victorfleury.github.io/tags/pyside/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Victor Fleury</copyright>
+    <lastBuildDate>Sun, 14 Jun 2020 20:55:41 -0500</lastBuildDate><atom:link href="http://example.org/tags/pyside/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Implementing drag and drop in Python using Qt</title>
-      <link>http://victorfleury.github.io/posts/qt_drag_n_drop/</link>
+      <link>http://example.org/posts/qt_drag_n_drop/</link>
       <pubDate>Sun, 14 Jun 2020 20:55:41 -0500</pubDate>
       
-      <guid>http://victorfleury.github.io/posts/qt_drag_n_drop/</guid>
+      <guid>http://example.org/posts/qt_drag_n_drop/</guid>
       <description>Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.
 I had to implement this using a model/view approach with Qt.
-Here is the official doc : Qt Model/View 
-Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model needs in order to implement this correctly.</description>
+Here is the official doc : Qt Model/View Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model needs in order to implement this correctly.</description>
     </item>
     
   </channel>

@@ -1,74 +1,38 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>http://victorfleury.github.io/</loc>
-    <lastmod>2020-06-15T21:19:18-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/tags/c&#43;&#43;/</loc>
-    <lastmod>2020-06-15T21:19:18-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/posts/cpp_interfacing/</loc>
-    <lastmod>2020-06-15T21:19:18-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/posts/</loc>
-    <lastmod>2020-06-15T21:19:18-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/tags/python/</loc>
-    <lastmod>2020-06-15T21:19:18-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/tags/</loc>
-    <lastmod>2020-06-15T21:19:18-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/posts/qt_drag_n_drop/</loc>
+    <loc>http://example.org/</loc>
     <lastmod>2020-06-14T20:55:41-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/tags/pyside/</loc>
-    <lastmod>2020-06-14T20:55:41-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/tags/qt/</loc>
-    <lastmod>2020-06-14T20:55:41-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/posts/grab_photo_of_the_day/</loc>
-    <lastmod>2018-02-25T18:45:26+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/about/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/resume/</loc>
+  </url><url>
+    <loc>http://example.org/posts/qt_drag_n_drop/</loc>
+    <lastmod>2020-06-14T20:55:41-05:00</lastmod>
+  </url><url>
+    <loc>http://example.org/posts/</loc>
+    <lastmod>2020-06-14T20:55:41-05:00</lastmod>
+  </url><url>
+    <loc>http://example.org/tags/pyside/</loc>
+    <lastmod>2020-06-14T20:55:41-05:00</lastmod>
+  </url><url>
+    <loc>http://example.org/tags/python/</loc>
+    <lastmod>2020-06-14T20:55:41-05:00</lastmod>
+  </url><url>
+    <loc>http://example.org/tags/qt/</loc>
+    <lastmod>2020-06-14T20:55:41-05:00</lastmod>
+  </url><url>
+    <loc>http://example.org/tags/</loc>
+    <lastmod>2020-06-14T20:55:41-05:00</lastmod>
+  </url><url>
+    <loc>http://example.org/about/</loc>
     <priority>0</priority>
+  </url><url>
+    <loc>http://example.org/like/</loc>
+    <priority>0</priority>
+  </url><url>
+    <loc>http://example.org/now/</loc>
+    <priority>0</priority>
+  </url><url>
+    <loc>http://example.org/categories/</loc>
   </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/archive/</loc>
-  </url>
-  
-  <url>
-    <loc>http://victorfleury.github.io/categories/</loc>
-  </url>
-  
 </urlset>

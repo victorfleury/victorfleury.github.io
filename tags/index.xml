@@ -2,49 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Victor Fleury</title>
-    <link>http://victorfleury.github.io/tags/</link>
+    <link>http://example.org/tags/</link>
     <description>Recent content in Tags on Victor Fleury</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Made with &amp;#10084; using hugo</copyright>
-    <lastBuildDate>Mon, 15 Jun 2020 21:19:18 -0400</lastBuildDate>
-    
-	<atom:link href="http://victorfleury.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Victor Fleury</copyright>
+    <lastBuildDate>Sun, 14 Jun 2020 20:55:41 -0500</lastBuildDate><atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>c&#43;&#43;</title>
-      <link>http://victorfleury.github.io/tags/c&#43;&#43;/</link>
-      <pubDate>Mon, 15 Jun 2020 21:19:18 -0400</pubDate>
+      <title>PySide</title>
+      <link>http://example.org/tags/pyside/</link>
+      <pubDate>Sun, 14 Jun 2020 20:55:41 -0500</pubDate>
       
-      <guid>http://victorfleury.github.io/tags/c&#43;&#43;/</guid>
+      <guid>http://example.org/tags/pyside/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python</title>
-      <link>http://victorfleury.github.io/tags/python/</link>
-      <pubDate>Mon, 15 Jun 2020 21:19:18 -0400</pubDate>
-      
-      <guid>http://victorfleury.github.io/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>PySide</title>
-      <link>http://victorfleury.github.io/tags/pyside/</link>
+      <link>http://example.org/tags/python/</link>
       <pubDate>Sun, 14 Jun 2020 20:55:41 -0500</pubDate>
       
-      <guid>http://victorfleury.github.io/tags/pyside/</guid>
+      <guid>http://example.org/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Qt</title>
-      <link>http://victorfleury.github.io/tags/qt/</link>
+      <link>http://example.org/tags/qt/</link>
       <pubDate>Sun, 14 Jun 2020 20:55:41 -0500</pubDate>
       
-      <guid>http://victorfleury.github.io/tags/qt/</guid>
+      <guid>http://example.org/tags/qt/</guid>
       <description></description>
     </item>
     

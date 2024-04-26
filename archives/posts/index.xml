@@ -1,0 +1,560 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Victor Fleury</title>
+        <link>http://victorfleury.github.io/posts/</link>
+        <description>Recent content in Posts on Victor Fleury</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>Made with &amp;#10084; using hugo</copyright>
+        <lastBuildDate>Mon, 15 Jun 2020 21:19:18 -0400</lastBuildDate>
+        <atom:link href="http://victorfleury.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Interfacing C&#43;&#43; and Python</title>
+            <link>http://victorfleury.github.io/posts/cpp_interfacing/</link>
+            <pubDate>Mon, 15 Jun 2020 21:19:18 -0400</pubDate>
+            
+            <guid>http://victorfleury.github.io/posts/cpp_interfacing/</guid>
+            <description>How to interface C++ code with Python ? This is a quick how-to for :
+ Installing pybind on WSL (which should work on Linux in general) Writing a small piece of code in C++ Compiling and building the lib to expose in Python Using said lib.  The purpose of this is mainly to play with C++ and Python and see how the two can be interfaced so you can benefit from the speed of C++ via Python and vice-versa.</description>
+            <content type="html"><![CDATA[<h3 id="how-to-interface-c-code-with-python-">How to interface C++ code with Python ?</h3>
+<p>This is a quick <em>how-to</em> for :</p>
+<ul>
+<li>Installing <code>pybind</code> on WSL (which should work on Linux in general)</li>
+<li>Writing a small piece of code in C++</li>
+<li>Compiling and building the lib to expose in Python</li>
+<li>Using said lib.</li>
+</ul>
+<p>The purpose of this is mainly to play with C++ and Python and see how the two can
+be interfaced so you can benefit from the speed of C++ via Python and vice-versa.</p>
+<p>It works both ways !</p>
+<p>A quick list of the various libraries to do that :</p>
+<ul>
+<li><a href="https://www.boost.org/">Boost</a></li>
+<li><a href="https://github.com/pybind/pybind11">PyBind</a></li>
+<li><a href="https://cython.org/">Cython</a></li>
+</ul>
+<p>And probably many more but I stumbled mainly upon those while searching the internet.</p>
+<p>I chose to go with <strong>pybind</strong> as it is advertised as a simplified Boost.</p>
+<h3 id="1-installing-pybind">1. Installing pybind</h3>
+<p>Pre-requisites :</p>
+<ul>
+<li>python3-dev : Python dev package</li>
+<li>python&lt;version_number&gt;-dev</li>
+<li><a href="https://cmake.org/">cmake</a> : Tool to build, test, package software</li>
+<li>g++ : Compiler but that should be installed on any linux distro.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get install python3-dev cmake
+</code></pre></div><p>On my first try using the library, I ran into an issue where C++ couldn&rsquo;t find the Python headers it needed.
+So I had to specifically install the <code>python-dev</code> package that matched my Python version :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get install python3.6-dev
+</code></pre></div><p>First we need to clone the repository :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone git@github.com:pybind/pybind11.git
+$ cd pybind11
+</code></pre></div><p>The next step is to <code>build</code> the lib.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir build
+$ cd build
+$ cmake ..
+$ make install
+</code></pre></div><p>We also need to install the python package for <code>pybind</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pip3 install pybind11
+</code></pre></div><p>After that we should pretty much be all set.</p>
+<h3 id="2-writing-a-small-example">2. Writing a small example</h3>
+<p>This is directly and shamelessly taken from the documentation :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pybind11/pybind11.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">namespace</span> py <span style="color:#f92672">=</span> pybind11;
+
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+    <span style="color:#66d9ef">return</span> i <span style="color:#f92672">+</span> j;
+}
+
+PYBIND11_MODULE(example, m) {
+    m.doc() <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pybind11 example plugin&#34;</span>; <span style="color:#75715e">// optional module docstring
+</span><span style="color:#75715e"></span>
+    m.def(<span style="color:#e6db74">&#34;add&#34;</span>, <span style="color:#f92672">&amp;</span>add, <span style="color:#e6db74">&#34;A function which adds two numbers&#34;</span>);
+}
+</code></pre></div><h3 id="3-compiling-and-building-the-example">3. Compiling and building the example</h3>
+<p>To run the example this what the <code>pybind</code> doc says :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ g++ -O3 -Wall -shared -std<span style="color:#f92672">=</span>c++11 -fPIC <span style="color:#e6db74">`</span>python3 -m pybind11 --includes<span style="color:#e6db74">`</span> example.cpp -o example<span style="color:#e6db74">`</span>python3-config --extension-suffix<span style="color:#e6db74">`</span>
+</code></pre></div><p>The flags given here specify that we use Python3.</p>
+<p>The <code>-fPIC</code> flag is there to specify the path to the <code>pybind</code> headers.
+<code>pybind</code> comes with a sort of a convenient method to fill that out for us.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">$</span> python3 <span style="color:#f92672">-</span>m pybind11 <span style="color:#f92672">--</span>includes
+<span style="color:#f92672">-</span>I<span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>include<span style="color:#f92672">/</span>python3<span style="color:#f92672">.</span><span style="color:#ae81ff">6</span>m <span style="color:#f92672">-</span>I<span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>lib<span style="color:#f92672">/</span>python3<span style="color:#f92672">.</span><span style="color:#ae81ff">6</span><span style="color:#f92672">/</span>dist<span style="color:#f92672">-</span>packages<span style="color:#f92672">/</span>pybind11<span style="color:#f92672">/</span>include
+</code></pre></div><p>Same goes for the extension of the library we are building :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python3-config --extension-suffix
+.cpython-36m-x86_64-linux-gnu.so
+</code></pre></div><h3 id="4-running-the-python-code">4. Running the Python code</h3>
+<p>What is left to do is just to use the Python library :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">❯</span> python3
+Python <span style="color:#ae81ff">3.6</span><span style="color:#f92672">.</span><span style="color:#ae81ff">9</span> (default, Apr <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">2020</span>, <span style="color:#ae81ff">01</span>:<span style="color:#ae81ff">56</span>:<span style="color:#ae81ff">04</span>)
+[GCC <span style="color:#ae81ff">8.4</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span>] on linux
+Type <span style="color:#e6db74">&#34;help&#34;</span>, <span style="color:#e6db74">&#34;copyright&#34;</span>, <span style="color:#e6db74">&#34;credits&#34;</span> <span style="color:#f92672">or</span> <span style="color:#e6db74">&#34;license&#34;</span> <span style="color:#66d9ef">for</span> more information<span style="color:#f92672">.</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">import</span> example
+<span style="color:#f92672">&gt;&gt;&gt;</span> help(example)
+Help on module example:
+
+NAME
+    example <span style="color:#f92672">-</span> pybind11 example plugin
+
+FUNCTIONS
+    add(<span style="color:#f92672">...</span>) method of builtins<span style="color:#f92672">.</span>PyCapsule instance
+        add(arg0: int, arg1: int) <span style="color:#f92672">-&gt;</span> int
+
+        A function which adds two numbers
+
+FILE
+    <span style="color:#f92672">/</span>path<span style="color:#f92672">/</span>to<span style="color:#f92672">/</span>lib<span style="color:#f92672">/</span>example<span style="color:#f92672">.</span>cpython<span style="color:#f92672">-</span><span style="color:#ae81ff">36</span>m<span style="color:#f92672">-</span>x86_64<span style="color:#f92672">-</span>linux<span style="color:#f92672">-</span>gnu<span style="color:#f92672">.</span>so
+
+<span style="color:#f92672">&gt;&gt;&gt;</span> example<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+<span style="color:#ae81ff">3</span>
+</code></pre></div><p>And tada we got a wonderful lib to add integers in C++ accessible from Python !</p>
+<p>Next time we can look at building a small project example to dive more into classes, and OOP in C++
+and exposing those to Python.</p>
+<h3 id="useful-links">Useful links</h3>
+<ul>
+<li>pybind docs : <a href="https://pybind11.readthedocs.io/en/master/basics.html">https://pybind11.readthedocs.io/en/master/basics.html</a></li>
+</ul>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Implementing drag and drop in Python using Qt</title>
+            <link>http://victorfleury.github.io/posts/qt_drag_n_drop/</link>
+            <pubDate>Sun, 14 Jun 2020 20:55:41 -0500</pubDate>
+            
+            <guid>http://victorfleury.github.io/posts/qt_drag_n_drop/</guid>
+            <description>Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.
+I had to implement this using a model/view approach with Qt.
+Here is the official doc : Qt Model/View 
+Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model needs in order to implement this correctly.</description>
+            <content type="html"><![CDATA[<p>Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.</p>
+<p>I had to implement this using a model/view approach with <code>Qt</code>.</p>
+<p>Here is the official doc : <a href="https://doc.qt.io/qt-5/model-view-programming.html">Qt Model/View </a></p>
+<h2 id="lets-get-started-">Let&rsquo;s get started !</h2>
+<p>So first let&rsquo;s look at what the <code>model</code> needs in order to implement this correctly.</p>
+<p>It needs to have the following methods (check the links for more information):</p>
+<ul>
+<li><a href="https://doc.qt.io/qt-5/qabstractitemmodel.html#insert"><code>insertRows()</code></a> : important not to use the <code>insertRow()</code> method. Qt&rsquo;s documentation sepcifies that <code>insertRows()</code> method should be implemented rather than this one.</li>
+<li><a href="https://doc.qt.io/qt-5/qabstractitemmodel.html#removeRows"><code>removeRows()</code></a></li>
+<li><a href="https://doc.qt.io/qt-5/qabstractitemmodel.html#mimeData"><code>mimeData()</code></a></li>
+<li><a href="https://doc.qt.io/qt-5/qabstractitemmodel.html#mimeTypes"><code>mimeTypes()</code></a></li>
+<li><a href="https://doc.qt.io/qt-5/qabstractitemmodel.html#dropMimeData"><code>dropMimeData()</code></a></li>
+<li><a href="https://doc.qt.io/qt-5/qabstractitemmodel.html#flags"><code>flags()</code></a></li>
+<li><a href="https://doc.qt.io/qt-5/qabstractitemmodel.html#supportedDropActions"><code>supportedDropActions()</code></a></li>
+</ul>
+<h3 id="starting-point--mimetypes">Starting point : mimeTypes()</h3>
+<p>First, we need to reimplement the <code>mimeTypes()</code> method to let our model know that
+it will only need to act if a certain type of data is dragged or dropped.
+By default, the built-in models and views use an internal MIME type: application/x-qabstractitemmodeldatalist.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FoobarModel</span>(QtCore<span style="color:#f92672">.</span>QAbstractListModel):
+    MIME_TYPES_ACCEPTED <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/foobar_data&#39;</span>
+    <span style="color:#75715e"># ...</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mimeTypes</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;Return a list of MIME types used to describe a list of indices.
+</span><span style="color:#e6db74">        Returns:
+</span><span style="color:#e6db74">            list(str): A list of accepted mime types.
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">return</span> [self<span style="color:#f92672">.</span>MIME_TYPES_ACCEPTED]
+</code></pre></div><p>Since we defined a custom <code>mimeTypes()</code> we need to implement the <code>mimeData()</code> and <code>dropMimeData()</code> functions as well.</p>
+<p>According to the documentation :</p>
+<pre><code>Returns an object that contains serialized items of data
+corresponding to the list of indexes specified.
+The format used to describe the encoded data is obtained from the mimeTypes()
+function.
+</code></pre><p>So we need to create an object that will contain serialized data and that is the <code>QMimeData</code> object.</p>
+<p>According to the documentation again :</p>
+<pre><code>QMimeData is used to describe information that can be stored in the clipboard,
+and transferred via the drag and drop mechanism.
+QMimeData objects associate the data that they hold with the corresponding MIME
+types to ensure that information can be safely transferred between applications
+and copied around within the same application.
+</code></pre><p>Its data is stored as <code>QByteArray</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mimeData</span>(self, indexes):
+    mime_data <span style="color:#f92672">=</span> QtCore<span style="color:#f92672">.</span>QMimeData()
+    data <span style="color:#f92672">=</span> QtCore<span style="color:#f92672">.</span>QByteArray()
+
+    <span style="color:#66d9ef">for</span> index <span style="color:#f92672">in</span> indexes:
+        <span style="color:#66d9ef">if</span> index<span style="color:#f92672">.</span>isValid():
+            data<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;/{0}&#34;</span><span style="color:#f92672">.</span>format(index<span style="color:#f92672">.</span>row()))
+
+    mime_data<span style="color:#f92672">.</span>setData(self<span style="color:#f92672">.</span>MIME_VERSION, data)
+
+    <span style="color:#66d9ef">return</span> mime_data
+</code></pre></div><p>The data is stored as a plain string.
+It can be a good idea to use a delimiter. That way we can store data for multiple rows and split it when processing the drop.</p>
+<h3 id="what-kind-of-drop-can-i-do">What kind of drop can I do?</h3>
+<p>We need to also define in the model what kind of drop it supports.</p>
+<p>The default is the <code>QtCore.Qt.CopyAction</code> but I wanted to move things around hence the use of :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">supportedDropActions</span>(self):
+    <span style="color:#66d9ef">return</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>MoveAction
+</code></pre></div><h3 id="what-can-be-dragged-">What can be dragged ?</h3>
+<p>To define which items can be dragged we need to implement the <code>flags()</code> method.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flags</span>(self, index):
+    flags <span style="color:#f92672">=</span> super(FoobarModel, self)<span style="color:#f92672">.</span>flags(index)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> index<span style="color:#f92672">.</span>isValid():
+        <span style="color:#66d9ef">return</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemIsEnabled <span style="color:#f92672">|</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemIsDropEnabled <span style="color:#f92672">|</span> flags
+    <span style="color:#66d9ef">return</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemFlags(QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>ItemIsDragEnabled <span style="color:#f92672">|</span> flags)
+</code></pre></div><p>With this we are doing two things :</p>
+<ul>
+<li>We first grab the defaults flags from the model.</li>
+<li>We enhance the default flags to add the <code>QtCore.Qt.ItemIsDragEnabled</code></li>
+<li>Then if the index is not valid (meaning we drop outside the items in the list)
+then its flags are extended to support it with <code>QtCore.Qt.ItemIsDropEnabled</code></li>
+</ul>
+<h3 id="insert-rows-and-remove-them">Insert rows and remove them</h3>
+<p>The next thing we need to implement now is the insertion and removal of the rows :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">insertRows</span>(self, row, count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, parent<span style="color:#f92672">=</span>QtCore<span style="color:#f92672">.</span>QModelIndex()):
+    self<span style="color:#f92672">.</span>beginInsertRows(parent, row, row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+    self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;Foo {0}&#39;</span><span style="color:#f92672">.</span>format(str(row)<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">4</span>)))
+    self<span style="color:#f92672">.</span>endInsertRows()
+    <span style="color:#66d9ef">return</span> True
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">removeRows</span>(self, row, count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, parent<span style="color:#f92672">=</span>QtCore<span style="color:#f92672">.</span>QModelIndex()):
+    self<span style="color:#f92672">.</span>beginRemoveRows(parent, row, row <span style="color:#f92672">+</span> count <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+    self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>pop(row)
+    self<span style="color:#f92672">.</span>endRemoveRows()
+    <span style="color:#66d9ef">return</span> True
+</code></pre></div><h3 id="drop-the-stuff">Drop the stuff</h3>
+<p>The dropping of items is handled by the <code>dropMimeData()</code> function.</p>
+<p>Quick note, if you drop things at the very end of the list, the index value might
+be <code>-1</code>, so in the case of our model it needs to be changed to the length of the
+list.</p>
+<p>The idea here is to :</p>
+<ul>
+<li>List the indexes of the items that are being moved.</li>
+<li>Determine the row where we want to drop.</li>
+<li>Create a list of items in reversed order to insert at the previously determined row.</li>
+<li>Remove the selected rows at their current index.</li>
+<li>Insert them at their new indexes.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dropMimeData</span>(
+        self,
+        data,
+        action,
+        row,
+        column<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,
+        parent<span style="color:#f92672">=</span>QtCore<span style="color:#f92672">.</span>QModelIndex()):
+    <span style="color:#66d9ef">if</span> action <span style="color:#f92672">is</span> QtCore<span style="color:#f92672">.</span>Qt<span style="color:#f92672">.</span>IgnoreAction:
+        <span style="color:#66d9ef">return</span> False
+
+    indexes_of_items_to_move <span style="color:#f92672">=</span> [
+        i<span style="color:#f92672">.</span>toInt()[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> data<span style="color:#f92672">.</span>data(self<span style="color:#f92672">.</span>MIME_VERSION)<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;/&#39;</span>)[<span style="color:#ae81ff">1</span>:]
+    ]
+    begin_row <span style="color:#f92672">=</span> row
+    dropping_outside <span style="color:#f92672">=</span> False
+    <span style="color:#66d9ef">for</span> item_row <span style="color:#f92672">in</span> indexes_of_items_to_move:
+        <span style="color:#66d9ef">if</span> item_row <span style="color:#f92672">&lt;</span> row:
+            begin_row <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">if</span> row <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:
+        begin_row <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rowCount() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        dropping_outside <span style="color:#f92672">=</span> True
+
+    items_to_move <span style="color:#f92672">=</span> sorted(
+        [self<span style="color:#f92672">.</span>_data[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> indexes_of_items_to_move],
+        reverse<span style="color:#f92672">=</span>True,
+    )
+
+    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> items_to_move:
+        self<span style="color:#f92672">.</span>beginRemoveRows(
+            parent, self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>index(item), self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>index(item),
+        )
+        self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>pop(self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>index(item))
+        self<span style="color:#f92672">.</span>endRemoveRows()
+
+    <span style="color:#66d9ef">if</span> dropping_outside:
+        begin_row <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rowCount()
+    self<span style="color:#f92672">.</span>beginInsertRows(
+        QtCore<span style="color:#f92672">.</span>QModelIndex(), begin_row, begin_row <span style="color:#f92672">+</span> len(items_to_move) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+    )
+    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> items_to_move:
+        self<span style="color:#f92672">.</span>_data<span style="color:#f92672">.</span>insert(begin_row, item)
+    self<span style="color:#f92672">.</span>endInsertRows(),
+
+    first <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>index(begin_row, <span style="color:#ae81ff">0</span>)
+    last <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>index(begin_row <span style="color:#f92672">+</span> len(items_to_move), <span style="color:#ae81ff">0</span>)
+    self<span style="color:#f92672">.</span>dataChanged<span style="color:#f92672">.</span>emit(first, last)
+
+    <span style="color:#66d9ef">return</span> False
+</code></pre></div><h2 id="catch-and-caveats">Catch and Caveats</h2>
+<h3 id="i-drop--my-items-but-some-of-my-rows-are-being-removed-">I drop  my items, but some of my rows are being removed !</h3>
+<p>If you take care of the reordering in the <code>dropMimeData()</code> method, be sure to not return <code>True</code> at the end as the Qt documentation is adivsing.
+If you return <code>True</code> then the <code>removeRows()</code> method gets called as the model data has changed.
+And you will end up with rows getting removed although you just wanted to move them.</p>
+<h2 id="bonus-points">BONUS Points:</h2>
+<p>If you want to have a custom indicator of the widgets you are dragging, you need to reimplement the method <code>startDrag()</code> on the view.</p>
+<p>We&rsquo;ll see that next time !</p>
+<script type="application/javascript" src="https://gist.github.com/victorfleury/d895872f0ae7cbff41db636c6e70ae55.js"></script>
+
+]]></content>
+        </item>
+        
+        <item>
+            <title>Grab a nice wallpaper every day</title>
+            <link>http://victorfleury.github.io/posts/grab_photo_of_the_day/</link>
+            <pubDate>Sun, 25 Feb 2018 18:45:26 +0100</pubDate>
+            
+            <guid>http://victorfleury.github.io/posts/grab_photo_of_the_day/</guid>
+            <description>This is a small tool I developed to grab the latest image from the National Geographic&amp;rsquo;s website and build a nice photo library of wallpapers.
+It is always nice to start the day with a new nice wallpaper.
+With a small cron job, it is then ran every day automatically.
+There is no API is provided, so we must scrap the webpage for the information we want.
+But with a simple bit of Python it is quite easy to grab these images.</description>
+            <content type="html"><![CDATA[<p>This is a small tool I developed to grab the latest image from the <a href="https://www.nationalgeographic.com/photography/photo-of-the-day/">National Geographic&rsquo;s</a> website and build a nice photo library of wallpapers.</p>
+<p>It is always nice to start the day with a new nice wallpaper.</p>
+<p>With a small <code>cron job</code>, it is then ran every day automatically.</p>
+<p>There is no API is provided, so we must scrap the webpage for the information we want.</p>
+<p>But with a simple bit of Python it is quite easy to grab these images.</p>
+<p>Let&rsquo;s inspect the page to find the interesting part.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">data-pestle-module</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;infiniteGallery&#34;</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/json&#34;</span> <span style="color:#a6e22e">data-pestle-options</span>&gt;
+        {&#34;id&#34;:&#34;OwFPp5uL&#34;,&#34;firstImage&#34;:&#34;https://www.nationalgeographic.com/photography/photo-of-the-day/2018/02/pakistan-coal-miner-portrait&#34;,&#34;endpoint&#34;:&#34;https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.2018-02.json&#34;,......
+</code></pre></div><p>Here what we are interested in, is the JSON file.
+Inspecting it in Firefox gives us a good overview of the content.
+We can see that there is one file per month of the year based on the naming convention : <code>.gallery.&lt;YEAR-MONTH&gt;.json</code></p>
+<p>The file contains a list of <code>items</code>. The useful ones are described as follow : <em>(The descriptions are only wild guesses.)</em></p>
+<ul>
+<li><code>index</code> : a sorting index</li>
+<li><code>title</code> : title of the photo</li>
+<li><code>caption</code> : caption text being displayed on the site</li>
+<li><code>credit</code> : author</li>
+<li><code>profileUrl</code> : profile page of the author</li>
+<li><code>altText</code> : alternative text</li>
+<li><code>full-path-url</code> : URL to the picture</li>
+<li><code>url</code> : root url</li>
+<li><code>originalUrl</code></li>
+<li><code>aspectRatio</code></li>
+<li><code>sizes</code> : a dictionary of sizes</li>
+<li><code>internal</code></li>
+<li><code>pageUrl</code></li>
+<li><code>publishDate</code> : date of publication</li>
+</ul>
+<p>The attribute we are going to look at more closely is the <code>size</code> one. It contains a dictionary with key/value as the size/url to the picture.</p>
+<p>It is then easy to write a small function that will extract the data from the JSON file and download the picture and save it wherever you want.</p>
+<p>Here is the simple code to get today&rsquo;s photo :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> logging
+<span style="color:#f92672">import</span> os
+<span style="color:#f92672">from</span> optparse <span style="color:#f92672">import</span> OptionParser
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> urllib
+
+
+logging<span style="color:#f92672">.</span>basicConfig()
+LOGGER <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger()
+LOGGER<span style="color:#f92672">.</span>setLevel(logging<span style="color:#f92672">.</span>INFO)
+ROOT_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://yourshot.nationalgeographic.com/&#39;</span>
+JSON_ROOT_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/&#39;</span>
+DATA_FORMAT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;.gallery.{YEAR}-{MONTH}.json&#39;</span>
+ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/victor/Images/&#39;</span>
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_picture</span>(item, size, base<span style="color:#f92672">=</span>ROOT_OUTPUT, force<span style="color:#f92672">=</span>False):
+    <span style="color:#e6db74">&#34;&#34;&#34;Get the picture of the day.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    This method will parse a given json file to retrieve a URL from which it
+</span><span style="color:#e6db74">    will download the picture.
+</span><span style="color:#e6db74">    Args:
+</span><span style="color:#e6db74">        item(dict): The dictionary representing the item
+</span><span style="color:#e6db74">        size(str): The size we cant to download.
+</span><span style="color:#e6db74">        base(str): The base of the path where images will be saved.
+</span><span style="color:#e6db74">        force(bool): Force overwrite of the image if it is already on disk.
+</span><span style="color:#e6db74">    Return:
+</span><span style="color:#e6db74">        bool: True if successful otherwise False
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    sizes <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;sizes&#39;</span>, None)
+    <span style="color:#66d9ef">if</span> sizes:
+        url_part <span style="color:#f92672">=</span> sizes[size]
+    <span style="color:#66d9ef">else</span>:
+        url_part <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;url&#39;</span>)
+
+    photo_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{0}&#39;</span><span style="color:#f92672">.</span>format(url_part)
+
+    raw_date <span style="color:#f92672">=</span> item[<span style="color:#e6db74">&#39;publishDate&#39;</span>]
+    converted <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>strptime(raw_date, <span style="color:#e6db74">&#39;%B </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">, %Y&#39;</span>)
+    output <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y_%m_</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>, converted)
+    <span style="color:#66d9ef">try</span>:
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(base):
+            os<span style="color:#f92672">.</span>makedirs(base)
+        <span style="color:#75715e"># Photo already exists and no need to download it again</span>
+        <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;{0}{1}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output)) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> force:
+            LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;  * File already exists on disk.&#39;</span>)
+            <span style="color:#66d9ef">return</span> True
+        urllib<span style="color:#f92672">.</span>urlretrieve(
+            photo_url,
+            <span style="color:#e6db74">&#39;{0}{1}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output),
+        )
+        LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;File successfully retrieved.&#39;</span>)
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">IOError</span>:
+        LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;Could not save file...&#39;</span>)
+        <span style="color:#66d9ef">return</span> False
+
+    <span style="color:#66d9ef">return</span> True
+</code></pre></div><p>From there, we can modify the script to retrieve all the photos from the month
+and add a bit of a command line interface with a parser, to look for the size we
+want to download :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> logging
+<span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> urllib
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">from</span> optparse <span style="color:#f92672">import</span> OptionParser
+
+logging<span style="color:#f92672">.</span>basicConfig()
+LOGGER <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger()
+LOGGER<span style="color:#f92672">.</span>setLevel(logging<span style="color:#f92672">.</span>INFO)
+ROOT_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://yourshot.nationalgeographic.com/&#39;</span>
+JSON_ROOT_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/&#39;</span>
+DATA_FORMAT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;.gallery.{YEAR}-{MONTH}.json&#39;</span>
+ROOT_OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/victor/Images/&#39;</span>
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_picture</span>(item, size, base<span style="color:#f92672">=</span>ROOT_OUTPUT, force<span style="color:#f92672">=</span>False):
+    <span style="color:#e6db74">&#34;&#34;&#34;Get the picture of the day.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    This method will parse a given json file to retrieve a URL from which it
+</span><span style="color:#e6db74">    will download the picture.
+</span><span style="color:#e6db74">    Args:
+</span><span style="color:#e6db74">        item(dict): The dictionary representing the item
+</span><span style="color:#e6db74">        size(str): The size we can to download.
+</span><span style="color:#e6db74">        base(str): The base of the path where images will be saved.
+</span><span style="color:#e6db74">        force(bool): Force overwrite of the image if it is already on disk.
+</span><span style="color:#e6db74">    Return:
+</span><span style="color:#e6db74">        bool: True if successful otherwise False
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    sizes <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;sizes&#39;</span>, None)
+    <span style="color:#66d9ef">if</span> sizes:
+        url_part <span style="color:#f92672">=</span> sizes[size]
+    <span style="color:#66d9ef">else</span>:
+        url_part <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;url&#39;</span>)
+
+    photo_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{0}&#39;</span><span style="color:#f92672">.</span>format(url_part)
+
+    raw_date <span style="color:#f92672">=</span> item[<span style="color:#e6db74">&#39;publishDate&#39;</span>]
+    converted <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>strptime(raw_date, <span style="color:#e6db74">&#39;%B </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">, %Y&#39;</span>)
+    output <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y_%m_</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>, converted)
+    <span style="color:#66d9ef">try</span>:
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(base):
+            os<span style="color:#f92672">.</span>makedirs(base)
+        <span style="color:#75715e"># Photo already exists and no need to download it again</span>
+        <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;{0}{1}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output)) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> force:
+            LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;File already exists on disk.&#39;</span>)
+            <span style="color:#66d9ef">return</span> True
+        urllib<span style="color:#f92672">.</span>urlretrieve(
+            photo_url,
+            <span style="color:#e6db74">&#39;{0}{1}.jpg&#39;</span><span style="color:#f92672">.</span>format(base, output),
+        )
+        LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;File successfully retrieved.&#39;</span>)
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">IOError</span>:
+        LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;Could not save file...&#39;</span>)
+        <span style="color:#66d9ef">return</span> False
+
+    <span style="color:#66d9ef">return</span> True
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_all_month_photos</span>(size<span style="color:#f92672">=</span>None, year<span style="color:#f92672">=</span>None, month<span style="color:#f92672">=</span>None, force<span style="color:#f92672">=</span>False):
+    <span style="color:#e6db74">&#34;&#34;&#34;Get all the photo of the month.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    Args:
+</span><span style="color:#e6db74">        size(str): The size of the picture we want to download.
+</span><span style="color:#e6db74">        year(str): The year to look for pictures.
+</span><span style="color:#e6db74">        month(str): The month to look for pictures.
+</span><span style="color:#e6db74">        force(bool): Force the download and save of the picture even if it is
+</span><span style="color:#e6db74">            already present.
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#75715e"># Checking the size</span>
+    <span style="color:#66d9ef">if</span> size <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;1024&#39;</span>, <span style="color:#e6db74">&#39;1600&#39;</span>, <span style="color:#e6db74">&#39;2048&#39;</span>, <span style="color:#e6db74">&#39;640&#39;</span>, <span style="color:#e6db74">&#39;320&#39;</span>, <span style="color:#e6db74">&#39;240&#39;</span>, <span style="color:#e6db74">&#39;800&#39;</span>, <span style="color:#e6db74">&#39;500&#39;</span>]:
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74">&#39;Size is not valid.&#39;</span>)
+    LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;About to retrieve data...&#39;</span>)
+
+    <span style="color:#75715e"># Getting the date and the month</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> year <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> month:
+        today_date <span style="color:#f92672">=</span> year <span style="color:#f92672">or</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>today()
+        today_iso <span style="color:#f92672">=</span> month <span style="color:#f92672">or</span> today_date<span style="color:#f92672">.</span>isoformat()
+
+        year, month, _ <span style="color:#f92672">=</span> today_iso<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;-&#39;</span>)
+
+    LOGGER<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;Retrieving date : {0}-{1}&#39;</span><span style="color:#f92672">.</span>format(year, month))
+    <span style="color:#75715e"># Retrieving the json file</span>
+    json_file_name <span style="color:#f92672">=</span> DATA_FORMAT<span style="color:#f92672">.</span>format(YEAR<span style="color:#f92672">=</span>year, MONTH<span style="color:#f92672">=</span>month)
+
+    json_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{0}{1}&#39;</span><span style="color:#f92672">.</span>format(JSON_ROOT_URL, json_file_name)
+
+    response <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>urlopen(json_url)
+    photos_data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(response<span style="color:#f92672">.</span>read())
+
+    <span style="color:#66d9ef">if</span> photos_data:
+        LOGGER<span style="color:#f92672">.</span>info(
+            <span style="color:#e6db74">&#39;Retrieving : {0} photos.&#39;</span><span style="color:#f92672">.</span>format(len(photos_data[<span style="color:#e6db74">&#39;items&#39;</span>]))
+        )
+
+    <span style="color:#66d9ef">for</span> index, item <span style="color:#f92672">in</span> enumerate(photos_data[<span style="color:#e6db74">&#39;items&#39;</span>]):
+        LOGGER<span style="color:#f92672">.</span>info(
+            <span style="color:#e6db74">&#39;Retrieving {0}/{1}&#39;</span><span style="color:#f92672">.</span>format(index<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, len(photos_data[<span style="color:#e6db74">&#39;items&#39;</span>]))
+        )
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> get_picture(item<span style="color:#f92672">=</span>item, size<span style="color:#f92672">=</span>size, force<span style="color:#f92672">=</span>force):
+            LOGGER<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;Could not retrieve : {0}&#39;</span><span style="color:#f92672">.</span>format(item[<span style="color:#e6db74">&#39;publishDate&#39;</span>]))
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    <span style="color:#f92672">import</span> sys
+    parser <span style="color:#f92672">=</span> OptionParser()
+    parser<span style="color:#f92672">.</span>add_option(
+        <span style="color:#e6db74">&#34;-s&#34;</span>,
+        <span style="color:#e6db74">&#34;--size&#34;</span>,
+        dest<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;size&#34;</span>,
+        default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2048&#39;</span>,
+        help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Size for the image.&#34;</span>,
+    )
+    parser<span style="color:#f92672">.</span>add_option(
+        <span style="color:#e6db74">&#34;-m&#34;</span>,
+        <span style="color:#e6db74">&#34;--month&#34;</span>,
+        dest<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;month&#34;</span>,
+        default<span style="color:#f92672">=</span>None,
+        help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;The month to get photo from.&#34;</span>,
+    )
+    parser<span style="color:#f92672">.</span>add_option(
+        <span style="color:#e6db74">&#34;-y&#34;</span>,
+        <span style="color:#e6db74">&#34;--year&#34;</span>,
+        dest<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;year&#34;</span>,
+        default<span style="color:#f92672">=</span>None,
+        help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Year to get photo from.&#34;</span>,
+    )
+    parser<span style="color:#f92672">.</span>add_option(
+        <span style="color:#e6db74">&#34;-f&#34;</span>,
+        <span style="color:#e6db74">&#34;--force&#34;</span>,
+        dest<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;force&#34;</span>,
+        action<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;store_true&#34;</span>,
+        default<span style="color:#f92672">=</span>False,
+        help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Year to get photo from.&#34;</span>,
+    )
+
+    options, _ <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>parse_args()
+
+    get_all_month_photos(
+        size<span style="color:#f92672">=</span>options<span style="color:#f92672">.</span>size,
+        year<span style="color:#f92672">=</span>options<span style="color:#f92672">.</span>year,
+        month<span style="color:#f92672">=</span>options<span style="color:#f92672">.</span>month,
+        force<span style="color:#f92672">=</span>options<span style="color:#f92672">.</span>force
+    )
+
+</code></pre></div><p>Now you just run it like this in a console :</p>
+<pre><code class="language-terminal" data-lang="terminal">$ python daily_photo.py
+</code></pre><p>Or with arguments :</p>
+<pre><code class="language-terminal" data-lang="terminal">$ python daily_photo.py --size 2048 --year 2018 --month 08
+</code></pre><p>Et voilà !</p>
+<p>There you have all the <em>photos of the day</em> of the month.</p>
+<p>Some improvements though, we could manage errors better in case the JSON file does not provide the correct size information, etc&hellip;</p>
+<p>That&rsquo;s all folks !</p>
+]]></content>
+        </item>
+        
+    </channel>
+</rss>
