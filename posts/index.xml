@@ -174,7 +174,7 @@ And you will end up with rows getting removed although you just wanted to move t
 <h2 id="bonus-points">BONUS Points:</h2>
 <p>If you want to have a custom indicator of the widgets you are dragging, you need to reimplement the method <code>startDrag()</code> on the view.</p>
 <p>We&rsquo;ll see that next time !</p>
-<script type="application/javascript" src="https://gist.github.com/victorfleury/d895872f0ae7cbff41db636c6e70ae55.js"></script>
+<script src="https://gist.github.com/victorfleury/d895872f0ae7cbff41db636c6e70ae55.js"></script>
 
 ]]></content>
         </item>

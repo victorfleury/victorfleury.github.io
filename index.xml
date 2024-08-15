@@ -7,51 +7,35 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Victor Fleury</copyright>
-    <lastBuildDate>Sun, 14 Jun 2020 20:55:41 -0500</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Jun 2020 20:55:41 -0500</lastBuildDate>
+    <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Implementing drag and drop in Python using Qt</title>
       <link>http://example.org/posts/qt_drag_n_drop/</link>
       <pubDate>Sun, 14 Jun 2020 20:55:41 -0500</pubDate>
-      
       <guid>http://example.org/posts/qt_drag_n_drop/</guid>
-      <description>Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.
-I had to implement this using a model/view approach with Qt.
-Here is the official doc : Qt Model/View Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model needs in order to implement this correctly.</description>
+      <description>Lately, I needed to implement a drag and drop behaviour to reorder widgets in a tool and this article is just a reminder to my future self on how to do it and what caveats I should remember avoiding.&#xA;I had to implement this using a model/view approach with Qt.&#xA;Here is the official doc : Qt Model/View Let&amp;rsquo;s get started ! So first let&amp;rsquo;s look at what the model needs in order to implement this correctly.</description>
     </item>
-    
+    <item>
+      <title></title>
+      <link>http://example.org/_like/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://example.org/_like/</guid>
+      <description>Software and tools that I really like bat starship nvim stow tmux fzf kitty git-cliff </description>
+    </item>
     <item>
       <title></title>
       <link>http://example.org/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>http://example.org/about/</guid>
-      <description>About me TL;DR I am a software developer.
-Working at RodeoFX as Lead Pipeline Developer.
-Basically, making data flow and helping artists make pretty pixels.
-Trying to design nice processes and workflows for the team !
-Technology I use and am familiar with : Python Bash Qt/PySide USD Maya Nuke Things I am interested in, and currently learning : Go Rust Places I have worked at RodeoFX in 🇨🇦 DNEG in 🇬🇧 and 🇨🇦 Various studios in 🇫🇷 Cool projects I have worked on Long story I have been working in the VFX industry for over 10 years now and as a software developer for almost 10 years.</description>
+      <description>About me TL;DR I am a software developer.&#xA;Working at RodeoFX as Senior Core Pipeline Developer.&#xA;Basically, making data flow and helping artists make pretty pixels.&#xA;Trying to design nice processes and workflows for the team !&#xA;You can learn more about my journey on my LinkedIn profile.&#xA;Technology I use and am familiar with : Python Bash Qt/PySide USD Maya Nuke Things I am interested in, and currently learning : Go Rust Places I have worked at RodeoFX in &amp;#x1f1e8;&amp;#x1f1e6; DNEG in &amp;#x1f1ec;&amp;#x1f1e7; and &amp;#x1f1e8;&amp;#x1f1e6; Various studios in &amp;#x1f1eb;&amp;#x1f1f7; Cool projects I have worked on Long story I have been working in the VFX industry for over 10 years now and as a software developer for almost 10 years.</description>
     </item>
-    
-    <item>
-      <title></title>
-      <link>http://example.org/like/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://example.org/like/</guid>
-      <description>Software and tools that I really like bat starship nvim stow tmux fzf kitty git-cliff </description>
-    </item>
-    
     <item>
       <title></title>
       <link>http://example.org/now/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>http://example.org/now/</guid>
-      <description>Now page This is my now page.
-I just stumbled upon this recently and found it quite cool.
-So right now I am :
-A happy dad of two wonderful girls ! Sharing my life with an amazing partner ! Living in 🇨🇦, Montreal QC Working as Lead Pipeline Developer at RodeoFx Learning Golang and Rust. Learning tricks on a fixed gear bike ! Learning to juggle with 4 balls !</description>
+      <description>Now page This is my now page.&#xA;I just stumbled upon this recently and found it quite cool.&#xA;So right now I am :&#xA;A happy dad of two wonderful girls ! Sharing my life with an amazing partner ! Living in &amp;#x1f1e8;&amp;#x1f1e6;, Montreal QC Working as Lead Pipeline Developer at RodeoFx Learning Golang and Rust. Learning tricks on a fixed gear bike ! Learning to juggle with 4 balls !</description>
     </item>
-    
   </channel>
 </rss>

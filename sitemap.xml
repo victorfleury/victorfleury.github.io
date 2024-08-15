@@ -4,7 +4,6 @@
   <url>
     <loc>http://example.org/</loc>
     <lastmod>2020-06-14T20:55:41-05:00</lastmod>
-    <priority>0</priority>
   </url><url>
     <loc>http://example.org/posts/qt_drag_n_drop/</loc>
     <lastmod>2020-06-14T20:55:41-05:00</lastmod>
@@ -24,14 +23,11 @@
     <loc>http://example.org/tags/</loc>
     <lastmod>2020-06-14T20:55:41-05:00</lastmod>
   </url><url>
-    <loc>http://example.org/about/</loc>
-    <priority>0</priority>
+    <loc>http://example.org/_like/</loc>
   </url><url>
-    <loc>http://example.org/like/</loc>
-    <priority>0</priority>
+    <loc>http://example.org/about/</loc>
   </url><url>
     <loc>http://example.org/now/</loc>
-    <priority>0</priority>
   </url><url>
     <loc>http://example.org/categories/</loc>
   </url>
